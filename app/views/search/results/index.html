@@ -1,0 +1,347 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+<div class="govuk-width-container">
+<a href="#" class="govuk-back-link">Back</a>
+
+<main class="govuk-main-wrapper">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">Search results</h1>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+
+
+    <div class="govuk-grid-column-one-third">
+      <div class="job-search__filters">
+                  <h2 class="job-search__filters-title">
+                      <span class="js-showhide" data-showhide-target-id="filterShowHide" tabindex="-1">Edit search</span>
+                  </h2>
+                  <div class="search-filters" id="filterShowHide">
+
+                    <div class="govuk-form-group">
+  <label class="govuk-label" for="email">
+    Keyword (optional)
+  </label>
+  <span id="email-hint" class="govuk-hint">
+    Enter a job title or skill
+  </span>
+  <input class="govuk-input" id="jobtitle" name="jobtitle" type="text" aria-describedby="job-title">
+</div>
+
+<div class="govuk-form-group">
+<label class="govuk-label" for="location">
+Location (optional)
+</label>
+
+<input class="govuk-input" id="location" name="location" type="text" aria-describedby="location">
+</div>
+
+<div class="govuk-form-group">
+<label class="govuk-label" for="sort">
+Within
+</label>
+                          <select name="radius" id="radius" class="govuk-select">
+                                  <option value="5">5 miles</option>
+                                  <option value="10">10 miles</option>
+                                  <option value="15">15 miles</option>
+                                  <option value="20">20 miles</option>
+                                  <option value="30" selected="">30 miles</option>
+                                  <option value="50">50 miles</option>
+                          </select>
+                      </div>
+
+                      <div class="govuk-checkboxes">
+
+                              <legend class="govuk-fieldset__legend">Other location (optional)</legend>
+                                <div class="govuk-checkboxes__item">
+                              <input id="overseas" name="overseas" class="govuk-checkboxes__input" type="checkbox" value="true" data-checked="false">
+                              <label for="overseas" class="govuk-label govuk-checkboxes__label">Overseas jobs</label>
+                          </div>
+                      </div>
+
+                      <details class="govuk-details">
+                        <summary class="govuk-details__summary">
+                          <span class="govuk-details__summary-text">
+                            Salary (Optional)
+                          </span>
+                        </summary>
+                        <div class="govuk-details__text">
+                          <div class="govuk-form-group">
+                          <label class="govuk-label" for="minSalary">
+                          Minimum
+                          </label>
+                                                    <select name="minSalary" id="minSalary" class="govuk-select">
+                                                      <option value="">No minimum</option><option value="10000">£10,000</option><
+                                                      option value="20000">£20,000</option><option value="30000">£30,000</option>
+                                                      <option value="40000">£40,000</option><option value="50000">£50,000</option>
+                                                      <option value="60000">£60,000</option><option value="70000">£70,000</option>
+                                                      <option value="80000">£80,000</option><option value="90000">£90,000</option>
+                                                      <option value="100000">£100,000</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="govuk-form-group">
+                                                <label class="govuk-label" for="maxSalary">
+                                                Maximum
+                                                </label>
+                                                                          <select name="maxSalary" id="maxSalary" class="govuk-select">
+                                                                            <option value="">No maximum</option><option value="10000">£10,000</option>
+                                                                            <option value="20000">£20,000</option><option value="30000">£30,000</option>
+                                                                            <option value="40000">£40,000</option><option value="50000">£50,000</option>
+                                                                            <option value="60000">£60,000</option><option value="70000">£70,000</option>
+                                                                            <option value="80000">£80,000</option><option value="90000">£90,000</option>
+                                                                            <option value="100000">£100,000</option>
+                                                                          </select>
+                                                                      </div>
+                        </div>
+                      </details>
+
+
+                      <div class="form-group form-group--collapsible">
+                          <fieldset>
+                              <legend class="form-label js-showhide-field js-showhide--initialized" data-showhide-target-id="salary-options" aria-expanded="false" aria-controls="salary-options" role="button" tabindex="0"><i class="
+              icon icon--before
+              ion-arrow-right-b
+              " aria-hidden="true"></i>Salary (optional)</legend>
+                              <div class="form-subgroup js-hidden" id="salary-options" aria-hidden="false">
+                                  <div class="form-group">
+                                      <label class="form-label-bold" for="minSalary">Min salary (optional)</label>
+                                      <select name="minSalary" id="minSalary" class="form-control">
+                                        <option value="">No minimum</option><option value="10000">£10,000</option><
+                                        option value="20000">£20,000</option><option value="30000">£30,000</option>
+                                        <option value="40000">£40,000</option><option value="50000">£50,000</option>
+                                        <option value="60000">£60,000</option><option value="70000">£70,000</option>
+                                        <option value="80000">£80,000</option><option value="90000">£90,000</option><option value="100000">£100,000</option>
+                                      </select>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="form-label-bold" for="maxSalary">Max salary (optional)</label>
+                                      <select name="maxSalary" id="maxSalary" class="form-control">
+                                        <option value="">No maximum</option><option value="10000">£10,000</option>
+                                        <option value="20000">£20,000</option><option value="30000">£30,000</option>
+                                        <option value="40000">£40,000</option><option value="50000">£50,000</option>
+                                        <option value="60000">£60,000</option><option value="70000">£70,000</option>
+                                        <option value="80000">£80,000</option><option value="90000">£90,000</option>
+                                        <option value="100000">£100,000</option></select>
+                                  </div>
+                              </div>
+                          </fieldset>
+                      </div>
+
+                      <div class="form-group form-group--collapsible">
+                          <label class="form-label js-showhide-field js-showhide--initialized" for="depts" data-showhide-target-id="department-list" aria-expanded="false" aria-controls="department-list" role="button" tabindex="0"><i class="
+              icon icon--before
+              ion-arrow-right-b
+              " aria-hidden="true"></i>Department (optional)</label>
+                          <div class="form-subgroup js-hidden" id="department-list" aria-hidden="false">
+                              <span><div class="autocomplete__wrapper" role="combobox" aria-expanded="false"><div aria-atomic="true" aria-live="polite" role="status" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin-bottom: -1px; margin-right: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">No search results.<span>,,</span></div><input aria-owns="depts__listbox" autocomplete="off" class="autocomplete__input autocomplete__input--default" id="depts" name="" placeholder="Start typing..." type="text" role="textbox"><ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden" id="depts__listbox" role="listbox"></ul></div></span><select name="depts" id="depts-select" class="form-control" style="display: none;">
+                                  <option value="">All departments</option>
+                                      <option value="1">Advisory, Conciliation and Arbitration Service</option>
+                                      <option value="2">Animal and Plant Health Agency</option>
+                                      <option value="3">Attorney General's Office</option>
+                                      <option value="4">Biotechnology and Biological Sciences Research Council</option>
+                                      <option value="5">British Council</option>
+                                      <option value="6">British Transport Police Authority</option>
+                                      <option value="7">Cabinet Office</option>
+                                      <option value="8">Care Quality Commission</option>
+                                      <option value="9">Centre for Environment, Fisheries and Aquaculture Science</option>
+                                      <option value="10">Charity Commission</option>
+                                      <option value="11">Children and Family Court Advisory and Support Service</option>
+                                      <option value="12">College of Policing</option>
+                                      <option value="13">Committee on Climate Change</option>
+                                      <option value="14">Commonwealth Parliamentary Association UK</option>
+                                      <option value="15">Companies House</option>
+                                      <option value="16">Competition &amp; Markets Authority</option>
+                                      <option value="17">Competition Commission</option>
+                                      <option value="18">Competition Service/Competition Appeal Tribunal</option>
+                                      <option value="19">Consumer Council for Water</option>
+                                      <option value="20">Criminal Cases Review Commission</option>
+                                      <option value="21">Criminal Injuries Compensation Authority</option>
+                                      <option value="22">Cross Departmental Opportunities</option>
+                                      <option value="23">Crown Commercial Service</option>
+                                      <option value="24">Crown Office and Procurator Fiscal Service</option>
+                                      <option value="25">Crown Prosecution Service</option>
+                                      <option value="26">Defence Electronics &amp; Components Agency</option>
+                                      <option value="27">Defence Science and Technology Laboratory</option>
+                                      <option value="28">Department for Business, Energy &amp; Industrial Strategy</option>
+                                      <option value="29">Department for Digital, Culture, Media and Sport</option>
+                                      <option value="30">Department for Education</option>
+                                      <option value="31">Department for Environment, Food and Rural Affairs</option>
+                                      <option value="32">Department for Exiting the European Union</option>
+                                      <option value="33">Department for International Development</option>
+                                      <option value="34">Department for International Trade</option>
+                                      <option value="35">Department for Transport</option>
+                                      <option value="36">Department for Work and Pensions</option>
+                                      <option value="37">Department of Energy and Climate Change</option>
+                                      <option value="38">Department of Health</option>
+                                      <option value="177">Department of Health and Social Care</option>
+                                      <option value="39">Disclosure &amp; Barring Service</option>
+                                      <option value="40">Driver and Vehicle Licensing Agency</option>
+                                      <option value="41">Driver and Vehicle Standards Agency</option>
+                                      <option value="42">Economic and Social Research Council</option>
+                                      <option value="43">Education and Skills Funding Agency</option>
+                                      <option value="44">Engineering and Physical Sciences Research Council</option>
+                                      <option value="45">Environment Agency</option>
+                                      <option value="46">Equality and Human Rights Commission</option>
+                                      <option value="47">ESTYN</option>
+                                      <option value="48">Food Standards Agency</option>
+                                      <option value="49">Food Standards Scotland</option>
+                                      <option value="50">Foreign and Commonwealth Office</option>
+                                      <option value="51">Forestry Commission</option>
+                                      <option value="52">Forestry Commission England</option>
+                                      <option value="53">Gambling Commission</option>
+                                      <option value="54">Gangmasters and Labour Abuse Authority</option>
+                                      <option value="55">Government Actuary's Department</option>
+                                      <option value="56">Government Commercial Function</option>
+                                      <option value="57">Government Communication Service</option>
+                                      <option value="58">Government Communications Headquarters</option>
+                                      <option value="59">Government Digital Service</option>
+                                      <option value="60">Government Internal Audit Agency</option>
+                                      <option value="61">Government Legal Department</option>
+                                      <option value="62">Government Operational Research Service</option>
+                                      <option value="63">Government Project Delivery Profession</option>
+                                      <option value="64">Government Recruitment Service</option>
+                                      <option value="65">Government Statistical Service</option>
+                                      <option value="66">Groceries Code Adjudicator</option>
+                                      <option value="67">Health and Safety Executive</option>
+                                      <option value="68">Her Majesty's Government Communications Centre</option>
+                                      <option value="176">Her Majesty's Inspectorate of Constabulary and Fire &amp; Rescue Services</option>
+                                      <option value="69">Higher Education Funding Council for England</option>
+                                      <option value="70">Higher Education Funding Council for Wales</option>
+                                      <option value="71">Highways England</option>
+                                      <option value="72">Historic Environment Scotland</option>
+                                      <option value="73">HM Courts and Tribunals Service</option>
+                                      <option value="74">HM Crown Prosecution Service Inspectorate</option>
+                                      <option value="75">HM Land Registry</option>
+                                      <option value="76">HM Prison &amp; Probation Service</option>
+                                      <option value="77">HM Revenue and Customs</option>
+                                      <option value="78">HM Treasury</option>
+                                      <option value="79">Home Office</option>
+                                      <option value="80">Homes England</option>
+                                      <option value="81">House of Commons</option>
+                                      <option value="82">House of Lords</option>
+                                      <option value="83">Housing Ombudsman Service</option>
+                                      <option value="84">Human Fertilisation &amp; Embryology Authority</option>
+                                      <option value="85">Human Tissue Authority</option>
+                                      <option value="86">Independent Anti-Slavery Commission</option>
+                                      <option value="87">Independent Inquiry into Child Sexual Abuse</option>
+                                      <option value="88">Independent Office for Police Conduct</option>
+                                      <option value="89">Independent Parliamentary Standards Authority</option>
+                                      <option value="90">Information Commissioner's Office</option>
+                                      <option value="91">Innovate UK</option>
+                                      <option value="92">Insolvency Service</option>
+                                      <option value="93">Institute for Apprenticeships</option>
+                                      <option value="94">Intellectual Property Office</option>
+                                      <option value="95">Joint Nature Conservation Committee</option>
+                                      <option value="96">Legal Aid Agency</option>
+                                      <option value="97">Local Democracy and Boundary Commission for Wales</option>
+                                      <option value="98">Local Government &amp; Social Care Ombudsman</option>
+                                      <option value="99">Marine Management Organisation</option>
+                                      <option value="100">Maritime and Coastguard Agency</option>
+                                      <option value="101">Medical Research Council</option>
+                                      <option value="102">Medicines and Healthcare Products Regulatory Agency</option>
+                                      <option value="103">Meteorological Office</option>
+                                      <option value="104">MI5</option>
+                                      <option value="105">Ministry of Defence</option>
+                                      <option value="106">Ministry of Housing, Communities &amp; Local Government</option>
+                                      <option value="107">Ministry of Justice</option>
+                                      <option value="108">National Crime Agency</option>
+                                      <option value="109">National Fraud Authority</option>
+                                      <option value="110">National Heritage Memorial Fund/ Heritage Lottery Fund</option>
+                                      <option value="111">National Infrastructure Commission</option>
+                                      <option value="112">National Measurement and Regulation Office</option>
+                                      <option value="113">National Savings and Investments</option>
+                                      <option value="114">Natural England</option>
+                                      <option value="115">Non Departmental Public Body</option>
+                                      <option value="116">Northern Ireland Office</option>
+                                      <option value="117">Office for Budget Responsibility</option>
+                                      <option value="118">Office for National Statistics</option>
+                                      <option value="119">Office for Standards in Education, Children's Services and Skills</option>
+                                      <option value="120">Office of Gas and Electricity Markets</option>
+                                      <option value="121">Office of Qualifications and Examinations Regulation</option>
+                                      <option value="122">Office of Rail and Road</option>
+                                      <option value="123">Office of the Advocate General for Scotland</option>
+                                      <option value="124">Office of the Children's Commissioner</option>
+                                      <option value="125">Office of the Immigration Services Commissioner</option>
+                                      <option value="126">Office of the Parliamentary Counsel</option>
+                                      <option value="127">Office of the Public Guardian</option>
+                                      <option value="128">Ofwat (Water Services Regulation Authority)</option>
+                                      <option value="129">Oil and Gas Authority</option>
+                                      <option value="130">Ordnance Survey</option>
+                                      <option value="131">Parliamentary and Health Service Ombudsman</option>
+                                      <option value="132">Parole Board</option>
+                                      <option value="133">Pensions Advisory Service</option>
+                                      <option value="134">Pensions Regulator</option>
+                                      <option value="135">Planning Inspectorate</option>
+                                      <option value="136">Public Health England</option>
+                                      <option value="137">Queen Elizabeth II Conference Centre</option>
+                                      <option value="138">Registers of Scotland</option>
+                                      <option value="139">Royal Botanic Gardens Kew</option>
+                                      <option value="140">Royal Commission on the Ancient and Historical Monuments of Wales</option>
+                                      <option value="141">Royal Parks</option>
+                                      <option value="142">Rural Payments Agency</option>
+                                      <option value="143">Scotland Office</option>
+                                      <option value="144">Scottish Court and Tribuneral Service</option>
+                                      <option value="145">Scottish Government</option>
+                                      <option value="146">Scottish Natural Heritage</option>
+                                      <option value="147">Secret Intelligence Service (MI6)</option>
+                                      <option value="148">Security Industry Authority</option>
+                                      <option value="149">Serious Fraud Office</option>
+                                      <option value="150">Sports Grounds Safety Authority</option>
+                                      <option value="151">Stabilisation Unit</option>
+                                      <option value="152">States of Jersey</option>
+                                      <option value="153">Student Awards Agency</option>
+                                      <option value="154">Student Loans Company</option>
+                                      <option value="155">The National Archives</option>
+                                      <option value="156">The Pensions Ombudsman</option>
+                                      <option value="157">The Pirbright Institute</option>
+                                      <option value="158">Transport Focus</option>
+                                      <option value="159">Tribunals Service - de-activated 18/06/12</option>
+                                      <option value="160">UK Debt Management Office</option>
+                                      <option value="161">UK Export Finance</option>
+                                      <option value="162">UK Government Investments</option>
+                                      <option value="163">UK Hydrographic Office</option>
+                                      <option value="178">UK Research and Innovation</option>
+                                      <option value="164">UK Space Agency</option>
+                                      <option value="165">UK Statistics Authority</option>
+                                      <option value="166">UK Supreme Court</option>
+                                      <option value="167">Valuation Office Agency</option>
+                                      <option value="168">Valuation Tribunal Service</option>
+                                      <option value="169">Vehicle Certification Agency</option>
+                                      <option value="170">Veterinary Medicines Directorate</option>
+                                      <option value="171">Wales Office</option>
+                                      <option value="172">Welsh Government</option>
+                                      <option value="173">Westminster Foundation for Democracy</option>
+                                      <option value="174">Wilton Park</option>
+                                      <option value="175">Youth Justice Board</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <input type="hidden" name="filtered" value="true">
+
+                      <div class="form-group">
+                          <input type="submit" class="button" value="Update results">
+                      </div>
+
+                  </div>            </div>
+  </div>
+
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l">Two-thirds column</h2>
+      <p class="govuk-body-l">This is a lead paragraph inside a two-thirds wide column</p>
+      <p class="govuk-body">This is a paragraph inside a two-thirds wide column</p>
+    </div>
+  </div>
+
+</main>
+</div>
+
+{% endblock %}

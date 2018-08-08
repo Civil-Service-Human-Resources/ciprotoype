@@ -1,0 +1,114 @@
+<!-- Legacy stuff -->
+<!--
+<div class="form-group">
+    <fieldset>
+      <legend class="heading-medium">
+
+      </legend>
+      <legend class="heading-medium">
+              {{input.label}}
+                {% if input.hint%}
+                    <span class="form-hint">{{input.hint}}</span>
+                {% endif %}
+            </legend>
+
+
+
+
+<!-- display radio options -->
+<!--
+            {% for radio in input.radios %}
+            <div class="multiple-choice" data-target="target-{{ radio.value}}">
+              <input id="{{radio.id}}" type="radio" name="{{ input.groupName }}" value="{{ radio.value}}" {% if radio.checked %}checked{% endif %} />
+              <label for="{{radio.id}}">{{ radio.label}}</label>
+
+            </div>
+
+            <div class="panel panel-border-narrow js-hidden" id="target-{{ radio.value}}">
+
+<!-- Loop around to get hidden multiple input boxes from concealedMultiInputs array -->
+
+<!--
+{% for radio in input.radios[loop.index - 1].concealedMultiInputs %}
+
+{% if(radio.concealedMultiType == "text") %}
+<div class="form-group">
+<label class="form-label" for="{{radio.concealedMultiId}}">{{ radio.concealedMultiLabel }}</label>
+<input class="form-control" id="{{ radio.concealedMultiId }}" type="text" name="{{ radio.concealedMultiName }}" value="{{ radio.concealedMultiValue }}"  />
+
+<!-- Check if its a postcode lookup -->
+<!--
+{% if (radio.concealedMultiRenderAs == "postcode") %}
+<div class="form-group"><a href="{{ radio.concealedMultiPCUrl }}" id="{{ radio.concealedMultiPCId }}" class="button button-secondary" >Find address</a></div></div>
+
+<div class="address--fields show-if-no-js">
+{% endif %}
+
+</div>
+{% endif %}
+<!-- end postcode lookup -->
+
+
+<!-- Start Date -->
+<!--
+{% if (radio.concealedMultiType == "date") %}
+<div class="form-group" {% if input.required %}data-required{% endif %} data-error="{{ input.errorText }}">
+    <fieldset>
+      <legend>
+        <span class="form-label-bold">
+          {{ radio.concealedMultiLabel }}
+        </span>
+        <span class="form-hint">{{ radio.concealedMultiHInt }}</span></label>
+      </legend>
+      <div class="form-date">
+        <div class="form-group form-group-day" {% if input.required %}data-required{% endif %} data-error="{{ input.errorText }}">
+          <label class="form-label" for="{{radio.concealedMultiName}}day">Day</label>
+          <input class="form-control" id="{{radio.concealedMultiName}}day" name="{{radio.concealedMultiName}}day" type="number" pattern="[0-9]*" min="0" max="31">
+        </div>
+        <div class="form-group form-group-month" {% if input.required %}data-required{% endif %} data-error="{{ input.errorText }}">
+          <label class="form-label" for="{{radio.concealedMultiName}}month">Month</label>
+          <input class="form-control" id="{{radio.concealedMultiName}}month" name="{{radio.concealedMultiName}}month" type="number" pattern="[0-9]*" min="0" max="12">
+        </div>
+        <div class="form-group form-group-year" {% if input.required %}data-required{% endif %} data-error="{{ input.errorText }}">
+          <label class="form-label" for="{{radio.concealedMultiName}}year">Year</label>
+          <input class="form-control" id="{{radio.concealedMultiName}}year" name="{{radio.concealedMultiName}}year" type="number" pattern="[0-9]*" min="{{input.minYear}}" max="{{input.concealedMultiMaxYear}}">
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  {% endif %}
+
+<!-- end Date -->
+
+<!-- Start Select -->
+<!--
+{% if(radio.concealedMultiType == "select") %}
+<div class="form-group" class="form-group" {% if input.required %}data-required{% endif %} data-error="{{ input.errorText }}">
+        <label class="form-label" for="{{ radio.concealedMultiId }}">{{ radio.concealedMultiLabel }}</label>
+        <select id="{{ radio.concealedMultiId }}" name="{{ radio.concealedMultiName }}" class="form-control">
+
+        {% for option in radio.concealedMultiSelect %}
+
+                <option value="{{ option.concealedMultiOptionValue }}">
+                  {{ option.concealedMultiOptionLabel }}
+                </option>
+        {% endfor %}
+
+      </select>
+
+</div>
+{% endif %}
+<!-- end select -->
+
+
+<!--
+    {% endfor %}
+  </div>
+{% endfor %}
+
+
+
+
+
+    </fieldset>
+  </div>

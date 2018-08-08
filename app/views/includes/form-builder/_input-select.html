@@ -1,0 +1,13 @@
+<div class="form-group" class="form-group" {% if input.required %}data-required{% endif %} data-error="{{ input.errorText }}">
+
+        <label class="form-label" for="{{ input.name }}">{{ input.label }}</label>
+        <select id="{{ select.name }}" name="{{ select.name }}" class="form-control">
+        {% for select in input.selectValues %}
+
+                <option value="{{ select.optionValue }}">{{ select.optionLabel }}</option>
+
+
+        {% endfor %}
+      </select>
+
+</div>

@@ -1,0 +1,47 @@
+<!-- <div class="form-group">
+    <fieldset {% if input.inline %}class="inline"{% endif %} {% if input.required %}data-required{% endif %} data-error="{{ input.errorText }}">
+        <legend class="heading-medium">
+            {{input.label}}
+            {% if input.hint%}
+                <span class="form-hint">{{input.hint}}</span>
+            {% endif %}
+        </legend>
+        {% for radio in input.radios %}
+            <div class="multiple-choice">
+                <input id="{{radio.id}}" type="{{input.type}}" name="{{ input.groupName }}" value="{{ radio.value}}" {% if radio.checked %}checked{% endif %} />
+                <label for="{{radio.id}}">{{ radio.label}}</label>
+            </div>
+        {% endfor %}
+    </fieldset>
+</div> -->
+
+
+<div class="govuk-form-group">
+
+  <fieldset class="govuk-fieldset" aria-describedby="example-hint">
+
+  <legend class="govuk-fieldset__legend">
+      {{input.label}}
+  </legend>
+
+  <span id="example-hint" class="govuk-hint">
+    {{ input.hint }}
+  </span>
+
+  <div {% if input.inline %} class="govuk-radios govuk-radios--inline" {% elif input.inline != inline %} class="govuk-radios" {% endif %}>
+
+  {% for radio in input.radios %}
+    <div class="govuk-radios__item">
+      <input class="govuk-radios__input" id="{{ radio.id  }}" name="{{ radio.groupName }}" type="{{ input.type }}" value="{{ radio.value }} {% if radio.checked %}checked{% endif %}">
+      <label class="govuk-label govuk-radios__label" for="{{ radio.id }}">
+      {{radio.label}}
+      </label>
+    </div>
+      {% endfor %}
+
+
+
+  </div>
+  </fieldset>
+
+</div>

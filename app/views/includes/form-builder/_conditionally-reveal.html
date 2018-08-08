@@ -1,0 +1,20 @@
+<div class="form-group">
+    <fieldset>
+      <legend class="heading-medium">
+        {{input.label}}
+          {% if input.hint%}
+              <span class="form-hint">{{input.hint}}</span>
+          {% endif %}
+      </legend>
+      {% for radio in input.radios %}
+      <div class="multiple-choice" data-target="target-{{ radio.value}}">
+        <input id="{{radio.id}}" type="radio" name="{{ input.groupName }}" value="{{ radio.value}}" {% if radio.checked %}checked{% endif %} />
+        <label for="{{radio.id}}">{{ radio.label}}</label>
+      </div>
+      <div class="panel panel-border-narrow js-hidden" id="target-{{ radio.value}}">
+        <label class="form-label" for="{{ radio.concealedId }}">{{ radio.concealedLabel}}</label>
+        <input class="form-control" name="{{ radio.concealedName }}" type="{{ radio.concealedType }}" id="{{ radio.concealedId }}">
+      </div>
+      {% endfor %}
+    </fieldset>
+  </div>

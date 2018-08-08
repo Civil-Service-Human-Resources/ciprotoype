@@ -1,0 +1,37 @@
+<!-- <div class="form-group" {% if input.required %}data-required{% endif %} data-error="{{ input.errorText }}">
+  <label class="form-label {% if input.visuallyHiddenLabel %}visuallyhidden{% endif %}" for="{{input.name}}">
+    {{ input.label }}
+    <span class="form-hint">{{input.hint}}</span></label>
+  <input class="form-control" id="{{input.name}}" name="{{input.name}}" type="{{input.type}}" value="{{input.value}}" placeholder="{{input.placeholder}}" {% if input.maxlength %} maxlength="{{input.maxlength}}" {% endif %}/>
+</div> -->
+
+
+{% if input.width %}
+
+{{ govukInput({
+  "type" : input.type,
+  "label": {
+    "text": input.label
+  },
+  "hint": {
+    "text": input.hint
+  },
+  "id": input.id,
+  "name": input.name,
+  "classes": "govuk-input--width-" + input.width
+
+}) }}
+
+{% else %}
+{{ govukInput({
+    "type" : input.type,
+  "label": {
+    "text": input.label
+  },
+  "hint": {
+    "text": input.hint
+  },
+  "id": input.id,
+  "name": input.name
+}) }}
+{% endif %}

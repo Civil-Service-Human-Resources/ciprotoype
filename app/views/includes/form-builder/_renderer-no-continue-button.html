@@ -1,0 +1,44 @@
+{% if form.backTo %}
+    <a href="{{ form.backTo }}" class="link-back">Back</a>
+{% endif %}
+<h1 class="heading-large">
+        {{h1}}
+    </h1>
+<form method="{% if(form.method =='post')%} post {% else %}get {% endif %}" action="{{form.action}}" name="{{form.name}}">
+  {% for input in form.inputs%}
+      {% if (input.type == "text") or (input.type == "password") %}
+          {% include "includes/form-builder/_input-text.html"%}
+      {% endif %}
+      {% if (input.type == "radio") or (input.type == "checkbox") %}
+          {% include "includes/form-builder/_input-radios.html"%}
+      {% endif %}
+      {% if (input.type == "select") %}
+          {% include "includes/form-builder/_input-select.html"%}
+      {% endif %}
+      {% if (input.type == "conditionallyReveal")%}
+          {% include "includes/form-builder/_conditionally-reveal.html"%}
+      {% endif %}
+      {% if (input.type == "conditionallyRevealMultiInput")%}
+          {% include "includes/form-builder/_conditionally-reveal-multi-input.html"%}
+      {% endif %}
+      {% if input.type == "file"%}
+          {% include "includes/form-builder/_file.html"%}
+      {% endif %}
+      {% if (input.type == "date") %}
+          {% include "includes/form-builder/_input-date.html"%}
+      {% endif %}
+      {% if input.type == "hidden"%}
+          {% include "includes/form-builder/_input-hidden.html"%}
+      {% endif %}
+      {% if input.type == "snippet"%}
+          {% include input.path %}
+      {% endif %}
+      {% if input.type == "html"%}
+          {{ input.html| safe}}
+      {% endif %}
+      {% if input.type == "dump"%}
+          {% include "includes/form-builder/_dump.html"%}
+      {% endif %}
+  {% endfor %}
+
+</form>

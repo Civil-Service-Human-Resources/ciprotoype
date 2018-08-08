@@ -1,0 +1,6 @@
+<div class="form-group  margin-top-20 file-input-group" {% if input.required %}data-required{% endif %} data-error="{{ input.errorText }}">
+  <label class="form-label {% if input.visuallyHiddenLabel %}visuallyhidden{% endif %}" for="{{input.name}}">
+    {{input.label}}
+  </label>
+  <input type="file" id="{{input.name}}">
+</div>

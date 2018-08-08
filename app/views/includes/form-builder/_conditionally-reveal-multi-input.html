@@ -1,0 +1,57 @@
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" {%if input.hint %} aria-describedby="hint-{{ input.id }}" {% endif %}>
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+      <h1 class="govuk-fieldset__heading">
+        {{ input.label }}
+  </span>
+
+
+      </h1>
+    </legend>
+    {% if input.hint%}
+    <span id="changed-name-hint" class="govuk-hint">
+{{ input.hint }}
+</span>
+
+    {% endif %}
+
+  <!-- cycle around the radios -->
+<div class="govuk-radios" data-module="radios">
+      {% for radio in input.radios %}
+
+
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="{{radio.id}}" name="{{ input.groupName }}" type="radio" value="email" data-aria-controls="target-{{ radio.id }}" {%if radio.checked == "checked" %} checked {% endif %}>
+
+        <label class="govuk-label govuk-radios__label" for="{{ radio.id }}">
+        {{ radio.label }}
+      </label>
+      </div>
+
+      <!-- Start the reveal panel -->
+      {% if radio.concealedInputs %}
+      <div class="govuk-radios__conditional" id="target-{{ radio.id }}">
+        {% for radio in input.radios[loop.index - 1].concealedInputs %}
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="{{ radio.concealedId }}">
+    {{ radio.concealedLabel }}
+  </label>
+  {% if radio.concealedHint %}
+  <span id="hint-{{radio.concealedId}}" class="govuk-hint">
+{{ radio.concealedHint }}
+</span>
+{% endif %}
+
+
+          <input class="govuk-input govuk-!-width-two-thirds" id="{{ radio.concealedId }}"
+          name="{{ radio.concealedName }}" type="{{ radio.concealedType }}" >
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <!-- end the concealed panel -->
+
+    {% endfor %}
+    </div>
+  </fieldset>
+</div>
