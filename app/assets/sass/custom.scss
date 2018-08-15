@@ -1,4 +1,30 @@
 
+.notification-banner {
+background-color: #005ea5;
+color: #fff;
+padding:5px 15px;
+}
+
+.signedIn {
+  text-align:right;
+  display:block;
+  font-size:14px;
+}
+
+.hidden {
+  display:none;
+  visibility:none;
+}
+
+.notification-banner__btn {
+  float:right;
+}
+
+.notification-banner .govuk-link:link, .notification-banner a:link, .notification-banner a:visited, .banner-heading, .notification-banner .govuk-body-m, .notification-banner p {color:#FFFFFF;}
+
+
+
+
 .job-search__item-row,
 .job-search__results-container {
     margin: 0 -15px
@@ -95,6 +121,13 @@
         width: calc(100% - 280px)
     }
 }
+
+@media (min-width: 641px){
+.job-search__item-attributes li {
+    float: left;
+    /* padding-right: 30px; */
+    width: 50%;
+}}
 
 .job-details__title small {
     font-family: "nta", Arial, sans-serif;
@@ -527,12 +560,14 @@
 
 .job-search__item-attributes li {
     margin-bottom: 15px
+
+
 }
 
 @media (min-width: 641px) {
     .job-search__item-attributes li {
         float: left;
-        padding-right: 30px;
+      /*  padding-right: 30px; */
         width: 50%
     }
 }
@@ -633,14 +668,14 @@
 @media (min-width: 768px) {
     .job-search__results-list-container {
         float: left;
-        width: 57.14286%
+      /*  width: 57.14286% removed by Dan L */
     }
 }
 
 @media (min-width: 960px) {
     .job-search__results-list-container {
         float: left;
-        width: 71.42857%
+      /*  width: 71.42857% removed by Dan L */
     }
 }
 
@@ -1287,7 +1322,8 @@
 }
 
 .job-search__results {
-    margin-bottom: 30px
+    margin-bottom: 30px;
+    padding:0;
 }
 
 .job-search__no-results {
@@ -1365,10 +1401,12 @@
     margin-bottom: 15px
 }
 
+
 @media (min-width: 641px) {
     .job-search__item-attributes li {
         float: left;
-        padding-right: 30px;
+      /*  padding-right: 30px; */
+
         width: 50%
     }
 }
@@ -1469,14 +1507,14 @@
 @media (min-width: 768px) {
     .job-search__results-list-container {
         float: left;
-        width: 57.14286%
+    /*    width: 57.14286% removed by Dan L */
     }
 }
 
 @media (min-width: 960px) {
     .job-search__results-list-container {
         float: left;
-        width: 71.42857%
+    /*    width: 71.42857% removed by Dan L */
     }
 }
 
