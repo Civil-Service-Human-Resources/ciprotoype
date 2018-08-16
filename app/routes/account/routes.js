@@ -4,13 +4,15 @@
 module.exports = function(router) {
 
   router.get('/account/sign-in', function(req, res) {
-
+    var emailAddress = req.session.data['accountEmail']
     res.render('layoutBuilder.html', {
       'layout': '2-0',
     //  'partial': 'account/createAccountAdvice',
       'h1': 'Sign in to your account',
       'captionXL': 'Sign in to apply for jobs and view and manage your job applications',
+
       'form': {
+        'action': '../search',
         'inputs': [{
             'type': 'html',
             'html': '<p class="govuk-body">Sign in or <a class="govuk-link" href="create-account-1">create an account</a> to get started.</p>'
@@ -32,7 +34,12 @@ module.exports = function(router) {
             'errorText': 'Please enter a valid password',
             'width': '20'
           },
-
+          {
+          'type' : 'hidden',
+          'id' : 'hasSignedIn',
+          'name' : 'hasSignedIn',
+          'value' : true
+},
           {
             'type': 'html',
             'html': '<p class="govuk-body"><a class="govuk-link" href="recover-account">I can\'t acccess my account</a></p>'
@@ -52,7 +59,6 @@ module.exports = function(router) {
 
 
   router.get('/account/create-account-1', function(req, res) {
-
     res.render('layoutBuilder.html', {
 
 
@@ -123,7 +129,7 @@ module.exports = function(router) {
         'inputs': [
           {
             'type' : 'html',
-            'html' : '<p class="govuk-body-l">Activate your account by following the instructions sent to your email address: itsme@myorganisation.co.uk</p>'},
+            'html' : '<p class="govuk-body-l">Activate your account by following the instructions sent to the email address: itsme@myorganisation.co.uk</p>'},
 
 
 

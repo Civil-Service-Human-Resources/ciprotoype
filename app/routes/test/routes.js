@@ -3,69 +3,71 @@
 
 module.exports = function(router) {
 
-  router.get('/test', function (req, res) {
-
+router.get('/test/', function (req, res) {
+var email = req.session.data['accountEmail']
 res.render('layoutBuilder.html',{
-  'layout' : '2-0',
-
-  'h1': 'Test area',
-  'captionXL' : 'Just a place for testing stuff without breaking anything else.',
 
 
-        'form': {
-          'inputs': [
+'layout' : '2-0',
+'h1': 'Create an account',
 
 
 
-            {
-       'type': 'conditionallyRevealMultiInput',
-       'groupName': 'propertySearchOptions',
-       'label': 'Are you currently employed as a civil servant?',
-       'hint': 'Civil servants can gain view and apply for jobs advertised internally in the Civil Service ',
-       'required': true,
-       'errorText': 'You must choose an option in order to search for a property',
-       'radios': [{
-           'id': 'yesCS',
-           'label': 'Yes, I am a civil servant',
-           'value': 'yesCS',
-           'name' : 'yesCS',
-           'concealedInputs': [{
-             'concealedLabel': 'Your work email address',
-             'concealedName': 'csEmailAddress',
-             'concealedId': 'csEmailAddress',
-             'concealedType': 'text',
-             'concealedHint' : 'We use your work email address to verify that you are a civil servant'
+      'form': {
 
-           }]
+        'action': '/test/output.html',
+        'name' : 'test',
+        'inputs': [
 
-         },
-         {
-           'id': 'noCS',
-           'label': 'No, I am not a civil servant',
-           'value': 'noCS',
-           'name' : 'noCS'
-         }
+          {
+            'type': 'text',
+            'name': 'caName',
+            'id': 'caName',
+            'label': 'Your name',
+            'hint' : "Your first and last name",
+            'errorText': 'You must enter a name',
+            'width' : '20'
+          },
+
+      {
+        'type': 'text',
+        'name': 'accountEmail',
+        'id': 'accountEmail',
+        'label': 'Email address',
+        'errorText': 'You must enter a valid email address',
+        'width' : '20'
+      },
+      {
+        'type': 'password',
+        'name': 'accountPassword',
+        'id': 'accountPassword',
+        'label': 'Password',
+        'errorText': 'Please enter a valid password',
+        'width' : '20'
+      },
 
 
-       ]
-     }
 
-        ],
+      ],
 
- 'buttonText' : 'Continue',
- 'buttonUrl' : 'search/results'
+'buttonText': 'Continue',
+'buttonDisabled': false
 }
 
 }
-    )
-  }
+  )
+}
 )
 
+router.get('/test/output/', function (req, res) {
 
-router.get('/account/register', function (req, res) {
+var emailAddress = req.session.data['accountEmail']
+var isCS = emailAddress.includes('gov');
 
-res.render('layoutBuilder.html',{
 
+res.render('test/output.html',{
+'email' : emailAddress,
+'cs' : isCS,
 
 'layout' : '2-0',
 'h1': 'Create an account',
@@ -101,22 +103,19 @@ res.render('layoutBuilder.html',{
         'errorText': 'Please enter a valid password',
         'width' : '20'
       },
+      {'type': 'dump'}
 
 
 
       ],
 
 'buttonText' : 'Sign in',
-'buttonUrl' : 'search/results'
+'buttonDisabled' : 'search/results'
 }
 
 }
   )
 }
-
-
-
-
-
 )
+
   }

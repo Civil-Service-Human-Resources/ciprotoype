@@ -24,13 +24,6 @@
 {% from 'header/macro.njk' import govukHeader %}
 
 
-
-
-
-
-
-
-
 {% block head %}
   {% include "includes/head.html" %}
 {% endblock %}
@@ -47,7 +40,7 @@
   <div class="app-cookie-banner js-cookie-banner">
     <p class="app-cookie-banner__message">{{cookieText | safe }}</p>
   </div>
-
+  {% if (data['hasSignedIn'])  %}
 
 
   {{ govukHeader({
@@ -70,12 +63,34 @@
         text: "My account"
       },
       {
+        href: "/account/sign-out",
+        text: "Sign out"
+      }
+    ]
+
+  }) }}
+
+  {% else %}
+  {{ govukHeader({
+    "homepageUrl": "/",
+    "serviceName": serviceName,
+    "serviceUrl": "/",
+    "containerClasses": "govuk-width-container",
+    navigation: [
+      {
+        href: "/search",
+        text: "Home",
+        active: true
+      },
+      {
         href: "/account/sign-in",
         text: "Sign in / create account"
       }
     ]
 
   }) }}
+
+{% endif %}
 
 {% endblock %}
 

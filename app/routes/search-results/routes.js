@@ -1,6 +1,22 @@
 // Search
 
+function checkUserData(req, res){
+  // if a user is not logged in redirect to the log in screen
 
+    if(req.session.data.user === undefined){
+      signedIn = false
+    }
+    else{
+      signedIn = true
+    }
+
+    // update the user name if a user has been through thr registration journey
+    if (req.session.data.fullName){
+      req.session.data.user.name = req.session.data.fullName
+    }
+
+    return signedIn
+}
 module.exports = function(router) {
 
   router.get('/search/', function (req, res) {
