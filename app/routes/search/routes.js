@@ -6,13 +6,14 @@ module.exports = function(router) {
   router.get('/search/', function (req, res) {
     var emailAddress = req.session.data['accountEmail']
     var signedIn = req.session.data['hasSignedIn']
+    var isCS = 'no'
       if (typeof emailAddress !== 'undefined') {
     var isCS = emailAddress.includes('gov');
   }
 
 res.render('layoutBuilder.html',{
 
-  'h1': 'Look for a job',
+  'h1': 'Job search',
   'captionXL' : 'Search and apply for jobs within the Civil Service and central government organisations',
   'email' : emailAddress,
   'cs' : isCS,
@@ -54,6 +55,27 @@ res.render('layoutBuilder.html',{
 
   }
 )
+
+router.get('/search/results', function (req, res) {
+  var emailAddress = req.session.data['accountEmail']
+  var signedIn = req.session.data['hasSignedIn']
+  var isCS = 'no'
+    if (typeof emailAddress !== 'undefined') {
+  var isCS = emailAddress.includes('gov');
+}
+
+res.render('./search/results/index.html',{
+'email' : emailAddress,
+'cs' : isCS
+  }
+
+
+  )
+}
+)
+
+
+
 
 
   }

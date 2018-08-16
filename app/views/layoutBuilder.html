@@ -11,7 +11,7 @@
 
 
 
-{% if (cs != true) and (data['hasSignedIn']) %}
+{% if (cs == 'no') and (data['hasSignedIn']) or (cs == false) %}
 <div class="notification-banner">
 <div class="wrapper">
 <p>
