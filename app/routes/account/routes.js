@@ -15,7 +15,8 @@ module.exports = function(router) {
         'action': '../search',
         'inputs': [{
             'type': 'html',
-            'html': '<p class="govuk-body">Sign in or <a class="govuk-link" href="create-account-1">create an account</a> to get started.</p>'
+            'html': '<p class="govuk-body">Sign in or <a class="govuk-link" href="create-account">create an account</a> to get started.</p>'
+
           },
           {
             'type': 'text',
@@ -58,13 +59,15 @@ module.exports = function(router) {
 
 
 
-  router.get('/account/create-account-1', function(req, res) {
+  router.get('/account/create-account', function(req, res) {
+    var emailAddress = req.session.data['accountEmail']
     res.render('layoutBuilder.html', {
 
 
       'layout': '2-0',
       'h1': 'Create an account',
       'form': {
+        'action': 'activation-code',
         'inputs': [
 
 
@@ -109,59 +112,25 @@ module.exports = function(router) {
 
         ],
 
-        'buttonText': 'Create account',
-        'buttonUrl': './create-account-2'
+        'buttonText': 'Create account'
       }
 
     })
   })
 
-  router.get('/account/create-account-2', function(req, res) {
-
-    res.render('layoutBuilder.html', {
-      'layout': '2-0',
-      'h1': 'Check your email',
-
-
-
-
-      'form': {
-        'inputs': [
-          {
-            'type' : 'html',
-            'html' : '<p class="govuk-body-l">Activate your account by following the instructions sent to the email address: itsme@myorganisation.co.uk</p>'},
-
-
-
-         {
-            'type': 'details',
-            'summary': 'I haven\'t received my activation email',
-            'text': '<p class="govuk-body">It may take a few minutes for the email to arrive. Please check your email spam  or junk mail folder. If you still haven\t received your email after a short while, you can  <a href="#">re-send activation link</a>.'
-          },
-
-        ],
-
-        'buttonText': 'Search for a job',
-        'buttonUrl': '../search/results/index-signedin'
-      }
-
-    })
-  })
 
   router.get('/account/activation-code', function(req, res) {
+    var emailAddress = req.session.data['accountEmail']
 
     res.render('layoutBuilder.html', {
       'layout': '2-0',
       'h1': 'Activate your account',
-
-
-
-
       'form': {
+        'action' : 'account-activated',
         'inputs': [
           {
-            'type' : 'html',
-            'html' : '<p class="govuk-body-l">A 6 digit activation code has been sent to your email address itsme@myorganisation.co.uk</p>'
+          'type' : 'partial',
+          'path' : '/account/activationCode'
           },
 
             {
@@ -172,26 +141,171 @@ module.exports = function(router) {
               'errorText': 'Invalid activation code',
               'width': '20'
             },
-
-
-
-
+            {
+              'type': 'hidden',
+              'name': 'accountStatus',
+              'id': 'accountStatus',
+              'value' : 'activated'
+            },
+            {
+            'type' : 'hidden',
+            'id' : 'hasSignedIn',
+            'name' : 'hasSignedIn',
+            'value' : true
+  },
          {
             'type': 'details',
-            'summary': 'I haven\'t received my activation email',
-            'text': '<p class="govuk-body">It may take a few minutes for the email to arrive. Please check your email spam  or junk mail folder. If you still haven\t received your email after a short while, you can  <a href="#">re-send activation link</a>.'
+            'summary': 'I haven\'t received my activation code',
+            'text': '<p class="govuk-body">It may take a few minutes for the email to arrive. Please check your email spam  or junk mail folder. If you still haven\'t received your email, you can  <a href="#">re-send the activation code</a>.'
           },
 
         ],
 
-        'buttonText': 'Activate account',
-        'buttonUrl': '../search/results/index-signedin'
+        'buttonText': 'Activate account'
       }
 
     })
   })
 
 
+  router.get('/account/account-activated', function(req, res) {
+    var emailAddress = req.session.data['accountEmail']
 
+
+    res.render('layoutBuilder.html', {
+      'layout': '2-0',
+      'h1': 'Acccount activated',
+
+      'form': {
+        'action' : '../search',
+        'inputs': [
+          {
+          'type' : 'partial',
+          'path' : '/account/accountActivated'
+          }
+        ],
+        'buttonText': 'Search for jobs'
+      }
+    })
+  })
+
+
+  router.get('/account/sign-out', function(req, res) {
+
+req.session.destroy();
+    res.render('layoutBuilder.html', {
+      'layout': '2-0',
+      'h1': 'Signed out',
+
+      'form': {
+        'action' : '../search',
+        'inputs': [
+          {
+          'type' : 'partial',
+          'path' : '/account/signedOut'
+          }
+        ],
+        'buttonText': 'Search for jobs'
+      }
+    })
+  })
+
+// Verify a GOV email address for internal jobs
+
+// Ask for Gov or work related email address to send activation link to
+
+  router.get('/account/verify-cs', function(req, res) {
+    res.render('layoutBuilder.html', {
+      'layout': '2-0',
+      'h1': 'Verify your Civil Service or work email address',
+
+      'form': {
+        'action' : 'verify-cs-link-sent',
+        'inputs': [
+
+          {
+            'type' : 'text',
+            'id' : 'csEmail',
+            'name' : 'csEmail',
+            'label' : 'Civil Service or work email address',
+            'hint' : 'Enter your Civil Service email address or a recognised government email address'
+          }
+
+        ],
+        'buttonText': 'Verify your email address'
+
+      }
+
+    })
+  })
+
+
+  // Notify user has been sent an activation link to their (GOV) email address
+
+  router.get('/account/verify-cs-link-sent', function(req, res) {
+  var emailAddress = req.session.data['csEmail']
+    var isCS = 'no'
+      if (typeof emailAddress !== 'undefined') {
+    var isCS = emailAddress.includes('gov');
+  }
+
+    res.render('layoutBuilder.html', {
+      'layout': '2-1',
+      'partial': 'account/emailVerify',
+      'cs' : isCS,
+      'h1': 'Check your email',
+
+      'form': {
+        'action' : '../search',
+        'inputs': [
+          {
+            'type' : 'partial',
+            'path' : 'account/verifyLink'
+          },
+
+
+
+         {
+            'type': 'details',
+            'summary': 'I haven\'t received my verification email',
+            'text': '<p class="govuk-body">It may take a few minutes for the email to arrive. Please check your email spam  or junk mail folder. If you still haven\t received your email after a short while, you can  <a href="#">re-send a verification link</a>.'
+          },
+
+        ],
+
+
+        'buttonText': 'Search for a job'
+
+      }
+
+    })
+  })
+
+// Message to say account has been verified - user can see internal jobs
+
+  router.get('/account/verify-cs-verified', function(req, res) {
+
+
+    res.render('layoutBuilder.html', {
+      'layout': '2-0',
+
+      'h1': 'Your Civil Service email account has been verified',
+
+      'form': {
+        'action' : '../search',
+        'inputs': [
+
+          {
+            'type' : 'partial',
+            'path' : 'account/emailVerified'
+          }
+
+        ],
+        'buttonText': 'Search for jobs'
+
+      }
+
+    })
+  })
 
 }
