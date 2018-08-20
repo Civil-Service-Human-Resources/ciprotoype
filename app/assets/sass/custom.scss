@@ -17,6 +17,12 @@ margin-bottom:32px;
   visibility:none;
 }
 
+
+.sr-only {
+  line-height:0;
+  display:none;
+}
+
 .notification-banner__btn {
   float:right;
 }
@@ -124,10 +130,19 @@ margin-bottom:32px;
 }
 
 @media (min-width: 641px){
+
+  .job-search__item-attributes {
+    margin:0;
+    padding:0;
+  }
 .job-search__item-attributes li {
     float: left;
     /* padding-right: 30px; */
     width: 50%;
+    font-family: "nta", Arial, sans-serif;
+    list-style-type: none;
+    margin:0;
+    padding:0;
 }}
 
 .job-details__title small {

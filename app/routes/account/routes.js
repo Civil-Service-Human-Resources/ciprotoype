@@ -168,8 +168,24 @@ module.exports = function(router) {
   })
 
 
+
+// to do - currently form just validates regardless of Code
+// check the activation code
+
+  router.get('/account/account-verification-check', function(req, res) {
+    var emailAddress = req.session.data['accountEmail']
+    var activationCode = req.session.data['activationCode']
+switch (activationCode) {
+  case '123456':
+  res.redirect('/account/account-activated')
+  break;
+}
+
+  })
+
   router.get('/account/account-activated', function(req, res) {
     var emailAddress = req.session.data['accountEmail']
+    var activationCode = req.session.data['activationCode']
 
 
     res.render('layoutBuilder.html', {
@@ -188,6 +204,11 @@ module.exports = function(router) {
       }
     })
   })
+
+
+
+
+
 
 
   router.get('/account/sign-out', function(req, res) {
