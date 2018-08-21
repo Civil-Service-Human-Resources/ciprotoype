@@ -1,4 +1,6 @@
 // Search
+
+var loadJobListing = require('../../data/jobListing')
 module.exports = function(router) {
 
 
