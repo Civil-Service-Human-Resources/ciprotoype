@@ -50,5 +50,8 @@
     "ignore": [
       "nunjucks"
     ]
+  },
+  "devDependencies": {
+    "nunjucks-date-filter": "^0.1.1"
   }
 }
