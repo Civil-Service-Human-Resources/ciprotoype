@@ -149,7 +149,7 @@ app.use(session({
 }))
 
 // Automatically store all data users enter
-if (useAutoStoreData === 'true') {
+if (useAutoStoreData === 'false') {
   app.use(utils.autoStoreData)
   utils.addCheckedFunction(nunjucksAppEnv)
   utils.addCheckedFunction(nunjucksDocumentationEnv)
