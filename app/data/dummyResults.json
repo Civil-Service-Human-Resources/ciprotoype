@@ -4,6 +4,7 @@
       {
         "id": 21,
         "identifier": 1589115,
+        "internal": true,
         "title": "Short app form all SP FH",
         "description": "This is the job description. It should give candidates enough information for them to decide whether to apply for this job. This is the job description. It should give candidates enough information for them to decide whether to apply for this job. This is the job description. It should give candidates enough information for them to decide whether to apply for this job. This is the job description. It should give candidates enough information for them to decide whether to apply for this job. This is the job description. It should give candidates enough information for them to decide whether to apply for this job. <br /><br />This is the job description. It should give candidates enough information for them to decide whether to apply for this job. <br /><br />This is the job description. It should give candidates enough information for them to decide whether to apply for this job. This is the job description. It should give candidates enough information for them to decide whether to apply for this job.",
         "shortDescription": null,
@@ -120,6 +121,7 @@
       {
         "id": 9,
         "identifier": 1589097,
+        "internal": true,
         "title": "Abilities 1 FH",
         "description": "Job description",
         "shortDescription": null,

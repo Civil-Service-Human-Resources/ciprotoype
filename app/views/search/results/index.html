@@ -7,35 +7,37 @@ GOV.UK Prototype Kit
 {% block content %}
 <div class="govuk-width-container">
 
-    {% if (data['hasSignedIn']) %}
-    <p class="signedIn">Welcome, {{ (data['accountEmail']) }} <a href="./account/sign-out">Sign out</a></p>
+    {% if sessionData.accountEmail %}
+        <p class="signedIn">Welcome, {{ sessionData.caName }}. <a href="./account/sign-out">Sign out</a></p>
     {% endif %}
 
 
-    {% if isCS == false %}
+    {% if sessionData %}
 
-    <div class="notification-banner">
-        <div class="wrapper">
-            <p>
-                <strong class="banner-heading">Want to see internal jobs?</strong>
-                <a
-                        href="#"
-                        class="notification-banner__btn"
-                        data-analytics="trackEvent"
-                        data-analytics-category="user-research"
-                        data-analytics-action="Close banner"
-                >Close</a>
-            </p>
-            <p>
-                <a
-                        href="../account/verify-cs"
-                        data-analytics="trackEvent"
-                        data-analytics-category="user-research"
-                        data-analytics-action="View sign up to user research screen"
-                >Verify your Civil Service email address</a>
-            </p>
+        {% if sessionData.isGov == false %}
+        <div class="notification-banner">
+            <div class="wrapper">
+                <p>
+                    <strong class="banner-heading">Want to see internal jobs?</strong>
+                    <a
+                            href="#"
+                            class="notification-banner__btn"
+                            data-analytics="trackEvent"
+                            data-analytics-category="user-research"
+                            data-analytics-action="Close banner"
+                    >Close</a>
+                </p>
+                <p>
+                    <a
+                            href="../account/verify-cs"
+                            data-analytics="trackEvent"
+                            data-analytics-category="user-research"
+                            data-analytics-action="View sign up to user research screen"
+                    >Verify your Civil Service email address</a>
+                </p>
+            </div>
         </div>
-    </div>
+        {% endif %}
 
     {% endif %}
 
@@ -421,9 +423,12 @@ GOV.UK Prototype Kit
 
                     <ul class="job-search__results">
 
-                        {% for job in data.vacancies.content %}
+                        {% for job in data %}
 
                         <li class="job-search__item">
+                            {% if job.internal == true %}
+                                <div class="internal">Internal</div>
+                            {% endif %}
                             <div class="job-search__item-row">
                                 <div class="job-search__item-first">
                                     <div class="job-search__item-image">

@@ -1,10 +1,16 @@
 // Search
 module.exports = function (router) {
   router.get('/search', function (req, res) {
-    let emailAddress = req.session.data['accountEmail']
-    let isCS = 'no'
-    if (typeof emailAddress !== 'undefined') {
-      isCS = emailAddress.includes('gov')
+
+    let emailAddress = false
+    let isGov = false
+
+    if (req.session.data) {
+      isGov = req.session.data.isGov
+      emailAddress = req.session.data.accountEmail
+      req.session.save(() => {
+        console.log(req.session.data)
+      })
     }
 
     res.render('layoutBuilder.html', {
@@ -12,7 +18,7 @@ module.exports = function (router) {
       'h1': 'Job search',
       'captionXL': 'Search and apply for jobs within the Civil Service and central government organisations',
       'email': emailAddress,
-      'cs': isCS,
+      'isGov': isGov,
       'form': {
         'action': '../search/results',
         'inputs': [

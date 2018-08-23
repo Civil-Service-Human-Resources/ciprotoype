@@ -4,7 +4,7 @@ module.exports = function (router) {
   router.get('/job/:id', function (req, res) {
 
     const singleJob = () => {
-      let j;
+      let j
       dummyResults.vacancies.content.forEach((job) => {
         if (job.id.toString() === req.params.id) {
           j = job
@@ -12,7 +12,7 @@ module.exports = function (router) {
       })
       return j
     }
-    res.render('jobs/internal.html', {
+    res.render('jobs/details.html', {
       'data': singleJob()
     })
   })

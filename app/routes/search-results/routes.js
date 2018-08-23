@@ -3,14 +3,32 @@ const dummyResults = require('../../data/dummyResults.json')
 
 module.exports = function (router) {
   router.get('/search/results', function (req, res) {
+    let sessionData = false
 
-    let isCS = req.session.data.isGov
+    if (req.session.data) {
+      sessionData = req.session.data
+      console.log(req.session.data)
+    }
 
-    console.log(req.session.data)
+    let correctResults = () => {
+      let result = []
+      dummyResults.vacancies.content.forEach((job) => {
+        if (job.internal) {
+          if (req.session.data) {
+            if (req.session.data.isGov) {
+              result.push(job)
+            }
+          }
+        } else {
+          result.push(job)
+        }
+      })
+      return result
+    }
 
     res.render('search/results/index.html', {
-      'data': dummyResults,
-      'isCS': isCS
+      'data': correctResults(),
+      'sessionData': sessionData
     })
   })
 }
