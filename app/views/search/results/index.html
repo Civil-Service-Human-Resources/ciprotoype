@@ -1,12 +1,13 @@
 {% extends "layout.html" %}
 
 {% block pageTitle %}
-  GOV.UK Prototype Kit
+GOV.UK Prototype Kit
 {% endblock %}
 
 {% block content %}
 <div class="govuk-width-container">
 
+<<<<<<< HEAD
   {% if (data['hasSignedIn']) %}
   <p class="signedIn">Welcome, {{ (data['accountEmail']) }} <a href="./account/sign-out">Sign out</a></p>
   {% endif %}
@@ -50,26 +51,65 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
+=======
+    {% if sessionData.accountEmail %}
+        <p class="signedIn">Welcome, {{ sessionData.caName }}. <a href="./account/sign-out">Sign out</a></p>
+    {% endif %}
 
 
+    {% if sessionData %}
+
+        {% if sessionData.isGov == false %}
+        <div class="notification-banner">
+            <div class="wrapper">
+                <p>
+                    <strong class="banner-heading">Want to see internal jobs?</strong>
+                    <a
+                            href="#"
+                            class="notification-banner__btn"
+                            data-analytics="trackEvent"
+                            data-analytics-category="user-research"
+                            data-analytics-action="Close banner"
+                    >Close</a>
+                </p>
+                <p>
+                    <a
+                            href="../account/verify-cs"
+                            data-analytics="trackEvent"
+                            data-analytics-category="user-research"
+                            data-analytics-action="View sign up to user research screen"
+                    >Verify your Civil Service email address</a>
+                </p>
+            </div>
+        </div>
+        {% endif %}
+>>>>>>> 789abc7c1853ed00bbd6cc6aef5553ee9772cdef
+
+    {% endif %}
 
 
+    <a href="#" class="govuk-back-link">Back</a>
 
-      <h1 class="govuk-heading-xl">Search results</h1>
+    <main class="govuk-main-wrapper">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
 
-    </div>
-  </div>
+                <h1 class="govuk-heading-xl">Search results</h1>
 
-  <div class="govuk-grid-row">
+            </div>
+        </div>
+
+        <div class="govuk-grid-row">
 
 
-    <div class="govuk-grid-column-one-third">
-      <div class="job-search__filters">
-                  <h2 class="job-search__filters-title">
-                      <span class="js-showhide" data-showhide-target-id="filterShowHide" tabindex="-1">Edit search</span>
-                  </h2>
-                  <div class="search-filters" id="filterShowHide">
+            <div class="govuk-grid-column-one-third">
+                <div class="job-search__filters">
+                    <h2 class="job-search__filters-title">
+                        <span class="js-showhide" data-showhide-target-id="filterShowHide" tabindex="-1">Edit search</span>
+                    </h2>
+                    <div class="search-filters" id="filterShowHide">
 
+<<<<<<< HEAD
                     <div class="govuk-form-group">
   <label class="govuk-label" for="jobtitle">
     Keyword (optional)
@@ -347,725 +387,435 @@ Within
                                                         </select>
 
                                                 </div>
-
-
+=======
+                        <div class="govuk-form-group">
+                            <label class="govuk-label">
+                                Keyword (optional)
+                            </label>
+                            <span id="email-hint" class="govuk-hint">
+    Enter a job title or skill
+  </span>
+                            <input class="govuk-input" id="jobtitle" name="jobtitle" type="text"
+                                   aria-describedby="job-title">
                         </div>
-                      </details>
+>>>>>>> 789abc7c1853ed00bbd6cc6aef5553ee9772cdef
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="location">
+                                Location (optional)
+                            </label>
+
+                            <input class="govuk-input" id="location" name="location" type="text"
+                                   aria-describedby="location">
+                        </div>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="sort">
+                                Within
+                            </label>
+                            <select name="radius" id="radius" class="govuk-select">
+                                <option value="5">5 miles</option>
+                                <option value="10">10 miles</option>
+                                <option value="15">15 miles</option>
+                                <option value="20">20 miles</option>
+                                <option value="30" selected="">30 miles</option>
+                                <option value="50">50 miles</option>
+                            </select>
+                        </div>
+
+                        <div class="govuk-checkboxes">
+
+                            <legend class="govuk-fieldset__legend">Other location (optional)</legend>
+                            <div class="govuk-checkboxes__item">
+                                <input id="overseas" name="overseas" class="govuk-checkboxes__input" type="checkbox"
+                                       value="true" data-checked="false">
+                                <label for="overseas" class="govuk-label govuk-checkboxes__label">Overseas jobs</label>
+                            </div>
+                        </div>
+
+                        <details class="govuk-details">
+                            <summary class="govuk-details__summary">
+                          <span class="govuk-details__summary-text">
+                            Salary (Optional)
+                          </span>
+                            </summary>
+                            <div class="govuk-details__text">
+                                <div class="govuk-form-group">
+                                    <label class="govuk-label" for="minSalary">
+                                        Minimum
+                                    </label>
+                                    <select name="minSalary" id="minSalary" class="govuk-select">
+                                        <option value="">No minimum</option>
+                                        <option value="10000">£10,000</option>
+                                        <
+                                        option value="20000">£20,000</option>
+                                        <option value="30000">£30,000</option>
+                                        <option value="40000">£40,000</option>
+                                        <option value="50000">£50,000</option>
+                                        <option value="60000">£60,000</option>
+                                        <option value="70000">£70,000</option>
+                                        <option value="80000">£80,000</option>
+                                        <option value="90000">£90,000</option>
+                                        <option value="100000">£100,000</option>
+                                    </select>
+                                </div>
+
+                                <div class="govuk-form-group">
+                                    <label class="govuk-label" for="maxSalary">
+                                        Maximum
+                                    </label>
+                                    <select name="maxSalary" id="maxSalary" class="govuk-select">
+                                        <option value="">No maximum</option>
+                                        <option value="10000">£10,000</option>
+                                        <option value="20000">£20,000</option>
+                                        <option value="30000">£30,000</option>
+                                        <option value="40000">£40,000</option>
+                                        <option value="50000">£50,000</option>
+                                        <option value="60000">£60,000</option>
+                                        <option value="70000">£70,000</option>
+                                        <option value="80000">£80,000</option>
+                                        <option value="90000">£90,000</option>
+                                        <option value="100000">£100,000</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </details>
 
 
-<!-- Old department drop down - left so that this can be used to improve the dropdown implemented above
-
-                      <div class="form-group form-group--collapsible">
-                          <label class="form-label js-showhide-field js-showhide--initialized" for="depts" data-showhide-target-id="department-list" aria-expanded="false" aria-controls="department-list" role="button" tabindex="0"><i class="
+                        <div class="form-group form-group--collapsible">
+                            <fieldset>
+                                <legend class="form-label js-showhide-field js-showhide--initialized"
+                                        data-showhide-target-id="salary-options" aria-expanded="false"
+                                        aria-controls="salary-options" role="button" tabindex="0"><i class="
               icon icon--before
               ion-arrow-right-b
-              " aria-hidden="true"></i>Department (optional)</label>
-                          <div class="form-subgroup js-hidden" id="department-list" aria-hidden="false">
-                              <span><div class="autocomplete__wrapper" role="combobox" aria-expanded="false"><div aria-atomic="true" aria-live="polite" role="status" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin-bottom: -1px; margin-right: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">No search results.<span>,,</span></div><input aria-owns="depts__listbox" autocomplete="off" class="autocomplete__input autocomplete__input--default" id="depts" name="" placeholder="Start typing..." type="text" role="textbox"><ul class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden" id="depts__listbox" role="listbox"></ul></div></span><select name="depts" id="depts-select" class="form-control" style="display: none;">
-                                  <option value="">All departments</option>
-                                      <option value="1">Advisory, Conciliation and Arbitration Service</option>
-                                      <option value="2">Animal and Plant Health Agency</option>
-                                      <option value="3">Attorney General's Office</option>
-                                      <option value="4">Biotechnology and Biological Sciences Research Council</option>
-                                      <option value="5">British Council</option>
-                                      <option value="6">British Transport Police Authority</option>
-                                      <option value="7">Cabinet Office</option>
-                                      <option value="8">Care Quality Commission</option>
-                                      <option value="9">Centre for Environment, Fisheries and Aquaculture Science</option>
-                                      <option value="10">Charity Commission</option>
-                                      <option value="11">Children and Family Court Advisory and Support Service</option>
-                                      <option value="12">College of Policing</option>
-                                      <option value="13">Committee on Climate Change</option>
-                                      <option value="14">Commonwealth Parliamentary Association UK</option>
-                                      <option value="15">Companies House</option>
-                                      <option value="16">Competition &amp; Markets Authority</option>
-                                      <option value="17">Competition Commission</option>
-                                      <option value="18">Competition Service/Competition Appeal Tribunal</option>
-                                      <option value="19">Consumer Council for Water</option>
-                                      <option value="20">Criminal Cases Review Commission</option>
-                                      <option value="21">Criminal Injuries Compensation Authority</option>
-                                      <option value="22">Cross Departmental Opportunities</option>
-                                      <option value="23">Crown Commercial Service</option>
-                                      <option value="24">Crown Office and Procurator Fiscal Service</option>
-                                      <option value="25">Crown Prosecution Service</option>
-                                      <option value="26">Defence Electronics &amp; Components Agency</option>
-                                      <option value="27">Defence Science and Technology Laboratory</option>
-                                      <option value="28">Department for Business, Energy &amp; Industrial Strategy</option>
-                                      <option value="29">Department for Digital, Culture, Media and Sport</option>
-                                      <option value="30">Department for Education</option>
-                                      <option value="31">Department for Environment, Food and Rural Affairs</option>
-                                      <option value="32">Department for Exiting the European Union</option>
-                                      <option value="33">Department for International Development</option>
-                                      <option value="34">Department for International Trade</option>
-                                      <option value="35">Department for Transport</option>
-                                      <option value="36">Department for Work and Pensions</option>
-                                      <option value="37">Department of Energy and Climate Change</option>
-                                      <option value="38">Department of Health</option>
-                                      <option value="177">Department of Health and Social Care</option>
-                                      <option value="39">Disclosure &amp; Barring Service</option>
-                                      <option value="40">Driver and Vehicle Licensing Agency</option>
-                                      <option value="41">Driver and Vehicle Standards Agency</option>
-                                      <option value="42">Economic and Social Research Council</option>
-                                      <option value="43">Education and Skills Funding Agency</option>
-                                      <option value="44">Engineering and Physical Sciences Research Council</option>
-                                      <option value="45">Environment Agency</option>
-                                      <option value="46">Equality and Human Rights Commission</option>
-                                      <option value="47">ESTYN</option>
-                                      <option value="48">Food Standards Agency</option>
-                                      <option value="49">Food Standards Scotland</option>
-                                      <option value="50">Foreign and Commonwealth Office</option>
-                                      <option value="51">Forestry Commission</option>
-                                      <option value="52">Forestry Commission England</option>
-                                      <option value="53">Gambling Commission</option>
-                                      <option value="54">Gangmasters and Labour Abuse Authority</option>
-                                      <option value="55">Government Actuary's Department</option>
-                                      <option value="56">Government Commercial Function</option>
-                                      <option value="57">Government Communication Service</option>
-                                      <option value="58">Government Communications Headquarters</option>
-                                      <option value="59">Government Digital Service</option>
-                                      <option value="60">Government Internal Audit Agency</option>
-                                      <option value="61">Government Legal Department</option>
-                                      <option value="62">Government Operational Research Service</option>
-                                      <option value="63">Government Project Delivery Profession</option>
-                                      <option value="64">Government Recruitment Service</option>
-                                      <option value="65">Government Statistical Service</option>
-                                      <option value="66">Groceries Code Adjudicator</option>
-                                      <option value="67">Health and Safety Executive</option>
-                                      <option value="68">Her Majesty's Government Communications Centre</option>
-                                      <option value="176">Her Majesty's Inspectorate of Constabulary and Fire &amp; Rescue Services</option>
-                                      <option value="69">Higher Education Funding Council for England</option>
-                                      <option value="70">Higher Education Funding Council for Wales</option>
-                                      <option value="71">Highways England</option>
-                                      <option value="72">Historic Environment Scotland</option>
-                                      <option value="73">HM Courts and Tribunals Service</option>
-                                      <option value="74">HM Crown Prosecution Service Inspectorate</option>
-                                      <option value="75">HM Land Registry</option>
-                                      <option value="76">HM Prison &amp; Probation Service</option>
-                                      <option value="77">HM Revenue and Customs</option>
-                                      <option value="78">HM Treasury</option>
-                                      <option value="79">Home Office</option>
-                                      <option value="80">Homes England</option>
-                                      <option value="81">House of Commons</option>
-                                      <option value="82">House of Lords</option>
-                                      <option value="83">Housing Ombudsman Service</option>
-                                      <option value="84">Human Fertilisation &amp; Embryology Authority</option>
-                                      <option value="85">Human Tissue Authority</option>
-                                      <option value="86">Independent Anti-Slavery Commission</option>
-                                      <option value="87">Independent Inquiry into Child Sexual Abuse</option>
-                                      <option value="88">Independent Office for Police Conduct</option>
-                                      <option value="89">Independent Parliamentary Standards Authority</option>
-                                      <option value="90">Information Commissioner's Office</option>
-                                      <option value="91">Innovate UK</option>
-                                      <option value="92">Insolvency Service</option>
-                                      <option value="93">Institute for Apprenticeships</option>
-                                      <option value="94">Intellectual Property Office</option>
-                                      <option value="95">Joint Nature Conservation Committee</option>
-                                      <option value="96">Legal Aid Agency</option>
-                                      <option value="97">Local Democracy and Boundary Commission for Wales</option>
-                                      <option value="98">Local Government &amp; Social Care Ombudsman</option>
-                                      <option value="99">Marine Management Organisation</option>
-                                      <option value="100">Maritime and Coastguard Agency</option>
-                                      <option value="101">Medical Research Council</option>
-                                      <option value="102">Medicines and Healthcare Products Regulatory Agency</option>
-                                      <option value="103">Meteorological Office</option>
-                                      <option value="104">MI5</option>
-                                      <option value="105">Ministry of Defence</option>
-                                      <option value="106">Ministry of Housing, Communities &amp; Local Government</option>
-                                      <option value="107">Ministry of Justice</option>
-                                      <option value="108">National Crime Agency</option>
-                                      <option value="109">National Fraud Authority</option>
-                                      <option value="110">National Heritage Memorial Fund/ Heritage Lottery Fund</option>
-                                      <option value="111">National Infrastructure Commission</option>
-                                      <option value="112">National Measurement and Regulation Office</option>
-                                      <option value="113">National Savings and Investments</option>
-                                      <option value="114">Natural England</option>
-                                      <option value="115">Non Departmental Public Body</option>
-                                      <option value="116">Northern Ireland Office</option>
-                                      <option value="117">Office for Budget Responsibility</option>
-                                      <option value="118">Office for National Statistics</option>
-                                      <option value="119">Office for Standards in Education, Children's Services and Skills</option>
-                                      <option value="120">Office of Gas and Electricity Markets</option>
-                                      <option value="121">Office of Qualifications and Examinations Regulation</option>
-                                      <option value="122">Office of Rail and Road</option>
-                                      <option value="123">Office of the Advocate General for Scotland</option>
-                                      <option value="124">Office of the Children's Commissioner</option>
-                                      <option value="125">Office of the Immigration Services Commissioner</option>
-                                      <option value="126">Office of the Parliamentary Counsel</option>
-                                      <option value="127">Office of the Public Guardian</option>
-                                      <option value="128">Ofwat (Water Services Regulation Authority)</option>
-                                      <option value="129">Oil and Gas Authority</option>
-                                      <option value="130">Ordnance Survey</option>
-                                      <option value="131">Parliamentary and Health Service Ombudsman</option>
-                                      <option value="132">Parole Board</option>
-                                      <option value="133">Pensions Advisory Service</option>
-                                      <option value="134">Pensions Regulator</option>
-                                      <option value="135">Planning Inspectorate</option>
-                                      <option value="136">Public Health England</option>
-                                      <option value="137">Queen Elizabeth II Conference Centre</option>
-                                      <option value="138">Registers of Scotland</option>
-                                      <option value="139">Royal Botanic Gardens Kew</option>
-                                      <option value="140">Royal Commission on the Ancient and Historical Monuments of Wales</option>
-                                      <option value="141">Royal Parks</option>
-                                      <option value="142">Rural Payments Agency</option>
-                                      <option value="143">Scotland Office</option>
-                                      <option value="144">Scottish Court and Tribuneral Service</option>
-                                      <option value="145">Scottish Government</option>
-                                      <option value="146">Scottish Natural Heritage</option>
-                                      <option value="147">Secret Intelligence Service (MI6)</option>
-                                      <option value="148">Security Industry Authority</option>
-                                      <option value="149">Serious Fraud Office</option>
-                                      <option value="150">Sports Grounds Safety Authority</option>
-                                      <option value="151">Stabilisation Unit</option>
-                                      <option value="152">States of Jersey</option>
-                                      <option value="153">Student Awards Agency</option>
-                                      <option value="154">Student Loans Company</option>
-                                      <option value="155">The National Archives</option>
-                                      <option value="156">The Pensions Ombudsman</option>
-                                      <option value="157">The Pirbright Institute</option>
-                                      <option value="158">Transport Focus</option>
-                                      <option value="159">Tribunals Service - de-activated 18/06/12</option>
-                                      <option value="160">UK Debt Management Office</option>
-                                      <option value="161">UK Export Finance</option>
-                                      <option value="162">UK Government Investments</option>
-                                      <option value="163">UK Hydrographic Office</option>
-                                      <option value="178">UK Research and Innovation</option>
-                                      <option value="164">UK Space Agency</option>
-                                      <option value="165">UK Statistics Authority</option>
-                                      <option value="166">UK Supreme Court</option>
-                                      <option value="167">Valuation Office Agency</option>
-                                      <option value="168">Valuation Tribunal Service</option>
-                                      <option value="169">Vehicle Certification Agency</option>
-                                      <option value="170">Veterinary Medicines Directorate</option>
-                                      <option value="171">Wales Office</option>
-                                      <option value="172">Welsh Government</option>
-                                      <option value="173">Westminster Foundation for Democracy</option>
-                                      <option value="174">Wilton Park</option>
-                                      <option value="175">Youth Justice Board</option>
-                              </select>
-                          </div>
-                      </div> -->
+              " aria-hidden="true"></i>Salary (optional)
+                                </legend>
+                                <div class="form-subgroup js-hidden" id="salary-options" aria-hidden="false">
+                                    <div class="form-group">
+                                        <label class="form-label-bold" for="minSalary">Min salary (optional)</label>
+                                        <select name="minSalary" id="minSalary" class="form-control">
+                                            <option value="">No minimum</option>
+                                            <option value="10000">£10,000</option>
+                                            <
+                                            option value="20000">£20,000</option>
+                                            <option value="30000">£30,000</option>
+                                            <option value="40000">£40,000</option>
+                                            <option value="50000">£50,000</option>
+                                            <option value="60000">£60,000</option>
+                                            <option value="70000">£70,000</option>
+                                            <option value="80000">£80,000</option>
+                                            <option value="90000">£90,000</option>
+                                            <option value="100000">£100,000</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label-bold" for="maxSalary">Max salary (optional)</label>
+                                        <select name="maxSalary" id="maxSalary" class="form-control">
+                                            <option value="">No maximum</option>
+                                            <option value="10000">£10,000</option>
+                                            <option value="20000">£20,000</option>
+                                            <option value="30000">£30,000</option>
+                                            <option value="40000">£40,000</option>
+                                            <option value="50000">£50,000</option>
+                                            <option value="60000">£60,000</option>
+                                            <option value="70000">£70,000</option>
+                                            <option value="80000">£80,000</option>
+                                            <option value="90000">£90,000</option>
+                                            <option value="100000">£100,000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
 
-                      <input type="hidden" name="filtered" value="true">
+                        <div class="form-group form-group--collapsible">
+                            <label class="form-label js-showhide-field js-showhide--initialized" for="depts"
+                                   data-showhide-target-id="department-list" aria-expanded="false"
+                                   aria-controls="department-list" role="button" tabindex="0"><i class="icon icon--before ion-arrow-right-b" aria-hidden="true"></i>Department (optional)</label>
+                            <div class="form-subgroup js-hidden" id="department-list" aria-hidden="false">
+                                <span><div class="autocomplete__wrapper" role="combobox" aria-expanded="false"><div
+                                        aria-atomic="true" aria-live="polite" role="status"
+                                        style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin-bottom: -1px; margin-right: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">No search results.<span>,,</span></div><input
+                                        aria-owns="depts__listbox" autocomplete="off"
+                                        class="autocomplete__input autocomplete__input--default" id="depts" name=""
+                                        placeholder="Start typing..." type="text" role="textbox"><ul
+                                        class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
+                                        id="depts__listbox" role="listbox"></ul></div></span><select name="depts"
+                                                                                                     id="depts-select"
+                                                                                                     class="form-control"
+                                                                                                     style="display: none;">
+                                <option value="">All departments</option>
+                                <option value="1">Advisory, Conciliation and Arbitration Service</option>
+                                <option value="2">Animal and Plant Health Agency</option>
+                                <option value="3">Attorney General's Office</option>
+                                <option value="4">Biotechnology and Biological Sciences Research Council</option>
+                                <option value="5">British Council</option>
+                                <option value="6">British Transport Police Authority</option>
+                                <option value="7">Cabinet Office</option>
+                                <option value="8">Care Quality Commission</option>
+                                <option value="9">Centre for Environment, Fisheries and Aquaculture Science</option>
+                                <option value="10">Charity Commission</option>
+                                <option value="11">Children and Family Court Advisory and Support Service</option>
+                                <option value="12">College of Policing</option>
+                                <option value="13">Committee on Climate Change</option>
+                                <option value="14">Commonwealth Parliamentary Association UK</option>
+                                <option value="15">Companies House</option>
+                                <option value="16">Competition &amp; Markets Authority</option>
+                                <option value="17">Competition Commission</option>
+                                <option value="18">Competition Service/Competition Appeal Tribunal</option>
+                                <option value="19">Consumer Council for Water</option>
+                                <option value="20">Criminal Cases Review Commission</option>
+                                <option value="21">Criminal Injuries Compensation Authority</option>
+                                <option value="22">Cross Departmental Opportunities</option>
+                                <option value="23">Crown Commercial Service</option>
+                                <option value="24">Crown Office and Procurator Fiscal Service</option>
+                                <option value="25">Crown Prosecution Service</option>
+                                <option value="26">Defence Electronics &amp; Components Agency</option>
+                                <option value="27">Defence Science and Technology Laboratory</option>
+                                <option value="28">Department for Business, Energy &amp; Industrial Strategy</option>
+                                <option value="29">Department for Digital, Culture, Media and Sport</option>
+                                <option value="30">Department for Education</option>
+                                <option value="31">Department for Environment, Food and Rural Affairs</option>
+                                <option value="32">Department for Exiting the European Union</option>
+                                <option value="33">Department for International Development</option>
+                                <option value="34">Department for International Trade</option>
+                                <option value="35">Department for Transport</option>
+                                <option value="36">Department for Work and Pensions</option>
+                                <option value="37">Department of Energy and Climate Change</option>
+                                <option value="38">Department of Health</option>
+                                <option value="177">Department of Health and Social Care</option>
+                                <option value="39">Disclosure &amp; Barring Service</option>
+                                <option value="40">Driver and Vehicle Licensing Agency</option>
+                                <option value="41">Driver and Vehicle Standards Agency</option>
+                                <option value="42">Economic and Social Research Council</option>
+                                <option value="43">Education and Skills Funding Agency</option>
+                                <option value="44">Engineering and Physical Sciences Research Council</option>
+                                <option value="45">Environment Agency</option>
+                                <option value="46">Equality and Human Rights Commission</option>
+                                <option value="47">ESTYN</option>
+                                <option value="48">Food Standards Agency</option>
+                                <option value="49">Food Standards Scotland</option>
+                                <option value="50">Foreign and Commonwealth Office</option>
+                                <option value="51">Forestry Commission</option>
+                                <option value="52">Forestry Commission England</option>
+                                <option value="53">Gambling Commission</option>
+                                <option value="54">Gangmasters and Labour Abuse Authority</option>
+                                <option value="55">Government Actuary's Department</option>
+                                <option value="56">Government Commercial Function</option>
+                                <option value="57">Government Communication Service</option>
+                                <option value="58">Government Communications Headquarters</option>
+                                <option value="59">Government Digital Service</option>
+                                <option value="60">Government Internal Audit Agency</option>
+                                <option value="61">Government Legal Department</option>
+                                <option value="62">Government Operational Research Service</option>
+                                <option value="63">Government Project Delivery Profession</option>
+                                <option value="64">Government Recruitment Service</option>
+                                <option value="65">Government Statistical Service</option>
+                                <option value="66">Groceries Code Adjudicator</option>
+                                <option value="67">Health and Safety Executive</option>
+                                <option value="68">Her Majesty's Government Communications Centre</option>
+                                <option value="176">Her Majesty's Inspectorate of Constabulary and Fire &amp; Rescue
+                                    Services
+                                </option>
+                                <option value="69">Higher Education Funding Council for England</option>
+                                <option value="70">Higher Education Funding Council for Wales</option>
+                                <option value="71">Highways England</option>
+                                <option value="72">Historic Environment Scotland</option>
+                                <option value="73">HM Courts and Tribunals Service</option>
+                                <option value="74">HM Crown Prosecution Service Inspectorate</option>
+                                <option value="75">HM Land Registry</option>
+                                <option value="76">HM Prison &amp; Probation Service</option>
+                                <option value="77">HM Revenue and Customs</option>
+                                <option value="78">HM Treasury</option>
+                                <option value="79">Home Office</option>
+                                <option value="80">Homes England</option>
+                                <option value="81">House of Commons</option>
+                                <option value="82">House of Lords</option>
+                                <option value="83">Housing Ombudsman Service</option>
+                                <option value="84">Human Fertilisation &amp; Embryology Authority</option>
+                                <option value="85">Human Tissue Authority</option>
+                                <option value="86">Independent Anti-Slavery Commission</option>
+                                <option value="87">Independent Inquiry into Child Sexual Abuse</option>
+                                <option value="88">Independent Office for Police Conduct</option>
+                                <option value="89">Independent Parliamentary Standards Authority</option>
+                                <option value="90">Information Commissioner's Office</option>
+                                <option value="91">Innovate UK</option>
+                                <option value="92">Insolvency Service</option>
+                                <option value="93">Institute for Apprenticeships</option>
+                                <option value="94">Intellectual Property Office</option>
+                                <option value="95">Joint Nature Conservation Committee</option>
+                                <option value="96">Legal Aid Agency</option>
+                                <option value="97">Local Democracy and Boundary Commission for Wales</option>
+                                <option value="98">Local Government &amp; Social Care Ombudsman</option>
+                                <option value="99">Marine Management Organisation</option>
+                                <option value="100">Maritime and Coastguard Agency</option>
+                                <option value="101">Medical Research Council</option>
+                                <option value="102">Medicines and Healthcare Products Regulatory Agency</option>
+                                <option value="103">Meteorological Office</option>
+                                <option value="104">MI5</option>
+                                <option value="105">Ministry of Defence</option>
+                                <option value="106">Ministry of Housing, Communities &amp; Local Government</option>
+                                <option value="107">Ministry of Justice</option>
+                                <option value="108">National Crime Agency</option>
+                                <option value="109">National Fraud Authority</option>
+                                <option value="110">National Heritage Memorial Fund/ Heritage Lottery Fund</option>
+                                <option value="111">National Infrastructure Commission</option>
+                                <option value="112">National Measurement and Regulation Office</option>
+                                <option value="113">National Savings and Investments</option>
+                                <option value="114">Natural England</option>
+                                <option value="115">Non Departmental Public Body</option>
+                                <option value="116">Northern Ireland Office</option>
+                                <option value="117">Office for Budget Responsibility</option>
+                                <option value="118">Office for National Statistics</option>
+                                <option value="119">Office for Standards in Education, Children's Services and Skills
+                                </option>
+                                <option value="120">Office of Gas and Electricity Markets</option>
+                                <option value="121">Office of Qualifications and Examinations Regulation</option>
+                                <option value="122">Office of Rail and Road</option>
+                                <option value="123">Office of the Advocate General for Scotland</option>
+                                <option value="124">Office of the Children's Commissioner</option>
+                                <option value="125">Office of the Immigration Services Commissioner</option>
+                                <option value="126">Office of the Parliamentary Counsel</option>
+                                <option value="127">Office of the Public Guardian</option>
+                                <option value="128">Ofwat (Water Services Regulation Authority)</option>
+                                <option value="129">Oil and Gas Authority</option>
+                                <option value="130">Ordnance Survey</option>
+                                <option value="131">Parliamentary and Health Service Ombudsman</option>
+                                <option value="132">Parole Board</option>
+                                <option value="133">Pensions Advisory Service</option>
+                                <option value="134">Pensions Regulator</option>
+                                <option value="135">Planning Inspectorate</option>
+                                <option value="136">Public Health England</option>
+                                <option value="137">Queen Elizabeth II Conference Centre</option>
+                                <option value="138">Registers of Scotland</option>
+                                <option value="139">Royal Botanic Gardens Kew</option>
+                                <option value="140">Royal Commission on the Ancient and Historical Monuments of Wales
+                                </option>
+                                <option value="141">Royal Parks</option>
+                                <option value="142">Rural Payments Agency</option>
+                                <option value="143">Scotland Office</option>
+                                <option value="144">Scottish Court and Tribuneral Service</option>
+                                <option value="145">Scottish Government</option>
+                                <option value="146">Scottish Natural Heritage</option>
+                                <option value="147">Secret Intelligence Service (MI6)</option>
+                                <option value="148">Security Industry Authority</option>
+                                <option value="149">Serious Fraud Office</option>
+                                <option value="150">Sports Grounds Safety Authority</option>
+                                <option value="151">Stabilisation Unit</option>
+                                <option value="152">States of Jersey</option>
+                                <option value="153">Student Awards Agency</option>
+                                <option value="154">Student Loans Company</option>
+                                <option value="155">The National Archives</option>
+                                <option value="156">The Pensions Ombudsman</option>
+                                <option value="157">The Pirbright Institute</option>
+                                <option value="158">Transport Focus</option>
+                                <option value="159">Tribunals Service - de-activated 18/06/12</option>
+                                <option value="160">UK Debt Management Office</option>
+                                <option value="161">UK Export Finance</option>
+                                <option value="162">UK Government Investments</option>
+                                <option value="163">UK Hydrographic Office</option>
+                                <option value="178">UK Research and Innovation</option>
+                                <option value="164">UK Space Agency</option>
+                                <option value="165">UK Statistics Authority</option>
+                                <option value="166">UK Supreme Court</option>
+                                <option value="167">Valuation Office Agency</option>
+                                <option value="168">Valuation Tribunal Service</option>
+                                <option value="169">Vehicle Certification Agency</option>
+                                <option value="170">Veterinary Medicines Directorate</option>
+                                <option value="171">Wales Office</option>
+                                <option value="172">Welsh Government</option>
+                                <option value="173">Westminster Foundation for Democracy</option>
+                                <option value="174">Wilton Park</option>
+                                <option value="175">Youth Justice Board</option>
+                            </select>
+                            </div>
+                        </div>
 
-                      <div class="form-group">
-                          <input type="submit" class="govuk-button" value="Update results">
-                      </div>
+                        <input type="hidden" name="filtered" value="true">
 
-                  </div>            </div>
-  </div>
+                        <div class="form-group">
+                            <input type="submit" class="button" value="Update results">
+                        </div>
 
-    <div class="govuk-grid-column-two-thirds">
-      <div class="job-search__results-list-container">
+                    </div>
+                </div>
+            </div>
 
-                <h2 class="sr-only">Your search results</h2>
-                  {% for job in jobListing %}
-                  <p>Test</p>
+            <div class="govuk-grid-column-two-thirds">
+                <div class="job-search__results-list-container">
 
-                  {% endfor %}
+                    <h2 class="sr-only">Your search results</h2>
 
                     <ul class="job-search__results">
-                        <li class="job-search__item" id="search-result0">
-                            <div class="job-search__item-row">
 
+                        {% for job in data %}
+
+                        <li class="job-search__item">
+                            {% if job.internal == true %}
+                                <div class="internal">Internal</div>
+                            {% endif %}
+                            <div class="job-search__item-row">
                                 <div class="job-search__item-first">
                                     <div class="job-search__item-image">
-
-                                        <img src="/public/images/logos/department/145-SG.png" alt="Scottish Government">
-
-
+                                        <img src="/public/images/logos/department{{ job.department.logoPath }}" alt="{{ job.department.name }}">
                                     </div>
                                 </div>
 
                                 <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result0-title">
-                                        <a href="/job/details/9727?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">Plant Health Inspector - Winter (IRC59508)</a>
+                                    <h3 class="job-search__item-title">
+                                        <a href="/job/{{ job.id }}">{{ job.title }}</a>
                                     </h3>
-
                                     <h4 class="sr-only">Job summary</h4>
                                     <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result0-salary">
+                                        <li>
                                             <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">£24,580 - £27,515</span>
+                                            <span class="job-search__item-attributes-value">£{{ job.salaryMin }} - £{{ job.salaryMax }}</span>
                                         </li>
 
-                                        <li id="search-result0-location">
+                                        <li>
                                             <strong class="job-search__item-attributes-label">Location</strong>
                                             <span class="job-search__item-attributes-value">Inverness</span>
                                         </li>
 
-                                        <li id="search-result0-numvacancies">
+                                        <li>
                                             <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">1</span>
+                                            <span class="job-search__item-attributes-value">{{ job.numberVacancies }}</span>
                                         </li>
-                                        <li id="search-result0-grade">
+                                        <li>
                                             <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Executive Officer</span>
+                                            <span class="job-search__item-attributes-value">{{ job.grade }}</span>
                                         </li>
-                                        <li id="search-result0-closingdate">
+                                        <li>
                                             <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">23 August 2018</span>
+                                            <span class="job-search__item-attributes-value">{{ job.closingDate | date("DD/MM/YYYY") }}</span>
                                         </li>
                                     </ul>
-
                                 </div>
-
                             </div>
-                        </li>    <li class="job-search__item" id="search-result1">
-                            <div class="job-search__item-row">
+                        </li>
 
-                                <div class="job-search__item-first">
-                                    <div class="job-search__item-image">
+                        {% else %}
+                            <h1>ERROR IN GETTING DATA</h1>
+                        {% endfor %}
 
-                                        <img src="/public/images/logos/department/51-FC.png" alt="Forestry Commission">
+                    </ul>
 
 
-                                    </div>
-                                </div>
 
-                                <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result1-title">
-                                        <a href="/job/details/11719?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">Wildlife Ranger</a>
-                                    </h3>
-
-                                    <h4 class="sr-only">Job summary</h4>
-                                    <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result1-salary">
-                                            <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">£27,001 - £28,844</span>
-                                        </li>
-
-                                        <li id="search-result1-location">
-                                            <strong class="job-search__item-attributes-label">Location</strong>
-                                            <span class="job-search__item-attributes-value">Dumfries and Borders Forest District, South Scotland. See job description for further information.</span>
-                                        </li>
-
-                                        <li id="search-result1-numvacancies">
-                                            <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">1</span>
-                                        </li>
-                                        <li id="search-result1-grade">
-                                            <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Administrative Officer</span>
-                                        </li>
-                                        <li id="search-result1-closingdate">
-                                            <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">2 September 2018</span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        </li>    <li class="job-search__item" id="search-result2">
-                            <div class="job-search__item-row">
-
-                                <div class="job-search__item-first">
-                                    <div class="job-search__item-image">
-
-                                        <img src="/public/images/logos/department/8-CQC.png" alt="Care Quality Commission">
-
-
-                                    </div>
-                                </div>
-
-                                <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result2-title">
-                                        <a href="/job/details/9532?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">Head of Financial Management</a>
-                                    </h3>
-
-                                    <h4 class="sr-only">Job summary</h4>
-                                    <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result2-salary">
-                                            <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">Salary £70,000 - Salary £70,000</span>
-                                        </li>
-
-                                        <li id="search-result2-location">
-                                            <strong class="job-search__item-attributes-label">Location</strong>
-                                            <span class="job-search__item-attributes-value">North West, Wales, East Midlands, London, Yorkshire and the Humber, South West, West Midlands, Northern Ireland, Eastern, North East, South East, Scotland</span>
-                                        </li>
-
-                                        <li id="search-result2-numvacancies">
-                                            <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">1</span>
-                                        </li>
-                                        <li id="search-result2-grade">
-                                            <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Other</span>
-                                        </li>
-                                        <li id="search-result2-closingdate">
-                                            <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">17 August 2018</span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        </li>    <li class="job-search__item" id="search-result3">
-                            <div class="job-search__item-row">
-
-                                <div class="job-search__item-first">
-                                    <div class="job-search__item-image">
-
-                                        <img src="/public/images/logos/department/12-COP.png" alt="College of Policing">
-
-
-                                    </div>
-                                </div>
-
-                                <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result3-title">
-                                        <a href="/job/details/11322?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">Trainer Development Manager</a>
-                                    </h3>
-
-                                    <h4 class="sr-only">Job summary</h4>
-                                    <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result3-salary">
-                                            <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">National: £28,200 - £34,189 - London: £33,237 - £39,798</span>
-                                        </li>
-
-                                        <li id="search-result3-location">
-                                            <strong class="job-search__item-attributes-label">Location</strong>
-                                            <span class="job-search__item-attributes-value">Location: Home based</span>
-                                        </li>
-
-                                        <li id="search-result3-numvacancies">
-                                            <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">1</span>
-                                        </li>
-                                        <li id="search-result3-grade">
-                                            <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Senior Executive Officer</span>
-                                        </li>
-                                        <li id="search-result3-closingdate">
-                                            <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">21 August 2018</span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        </li>    <li class="job-search__item" id="search-result4">
-                            <div class="job-search__item-row">
-
-                                <div class="job-search__item-first">
-                                    <div class="job-search__item-image">
-
-                                        <img src="/public/images/logos/department/73-HMCTS.png" alt="HM Courts and Tribunals Service">
-
-
-                                    </div>
-                                </div>
-
-                                <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result4-title">
-                                        <a href="/job/details/10478?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">Capability Officer, Band D (Ref: 20169)</a>
-                                    </h3>
-
-                                    <h4 class="sr-only">Job summary</h4>
-                                    <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result4-salary">
-                                            <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">£20,448 - £29,290</span>
-                                        </li>
-
-                                        <li id="search-result4-location">
-                                            <strong class="job-search__item-attributes-label">Location</strong>
-                                            <span class="job-search__item-attributes-value">This post can be based Nationally or in London</span>
-                                        </li>
-
-                                        <li id="search-result4-numvacancies">
-                                            <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">2</span>
-                                        </li>
-                                        <li id="search-result4-grade">
-                                            <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Executive Officer</span>
-                                        </li>
-                                        <li id="search-result4-closingdate">
-                                            <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">15 August 2018</span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        </li>    <li class="job-search__item" id="search-result5">
-                            <div class="job-search__item-row">
-
-                                <div class="job-search__item-first">
-                                    <div class="job-search__item-image">
-
-                                        <img src="/public/images/logos/department/73-HMCTS.png" alt="HM Courts and Tribunals Service">
-
-
-                                    </div>
-                                </div>
-
-                                <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result5-title">
-                                        <a href="/job/details/11264?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">Senior Project Manager - Band A (Ref: 20336)</a>
-                                    </h3>
-
-                                    <h4 class="sr-only">Job summary</h4>
-                                    <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result5-salary">
-                                            <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">£42,879 - £69,659</span>
-                                        </li>
-
-                                        <li id="search-result5-location">
-                                            <strong class="job-search__item-attributes-label">Location</strong>
-                                            <span class="job-search__item-attributes-value">This role can be based Nationally or at 102, Petty France, London SW1H 9AJ</span>
-                                        </li>
-
-                                        <li id="search-result5-numvacancies">
-                                            <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">1</span>
-                                        </li>
-                                        <li id="search-result5-grade">
-                                            <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Grade 6, Grade 7</span>
-                                        </li>
-                                        <li id="search-result5-closingdate">
-                                            <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">21 August 2018</span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        </li>    <li class="job-search__item" id="search-result6">
-                            <div class="job-search__item-row">
-
-                                <div class="job-search__item-first">
-                                    <div class="job-search__item-image">
-
-                                        <img src="/public/images/logos/department/65-GSS.png" alt="Government Statistical Service">
-
-
-                                    </div>
-                                </div>
-
-                                <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result6-title">
-                                        <a href="/job/details/5140?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">Senior Statistician</a>
-                                    </h3>
-
-                                    <h4 class="sr-only">Job summary</h4>
-                                    <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result6-salary">
-                                            <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">National starting from £33,150 London starting from £36,131</span>
-                                        </li>
-
-                                        <li id="search-result6-location">
-                                            <strong class="job-search__item-attributes-label">Location</strong>
-                                            <span class="job-search__item-attributes-value">South West, East Midlands, North West, London, Wales, West Midlands, Scotland, South East, Yorkshire and the Humber, North East</span>
-                                        </li>
-
-                                        <li id="search-result6-numvacancies">
-                                            <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">10</span>
-                                        </li>
-                                        <li id="search-result6-grade">
-                                            <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Senior Executive Officer</span>
-                                        </li>
-                                        <li id="search-result6-closingdate">
-                                            <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">2 September 2018</span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        </li>    <li class="job-search__item" id="search-result7">
-                            <div class="job-search__item-row">
-
-                                <div class="job-search__item-first">
-                                    <div class="job-search__item-image">
-
-                                        <img src="/public/images/logos/department/105-MoD.png" alt="Ministry of Defence">
-
-
-                                    </div>
-                                </div>
-
-                                <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result7-title">
-                                        <a href="/job/details/8103?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">DE&amp;S DESG Engineering Undergraduate Sponsorship Scheme</a>
-                                    </h3>
-
-                                    <h4 class="sr-only">Job summary</h4>
-                                    <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result7-salary">
-                                            <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">£15,000 (pro rata)</span>
-                                        </li>
-
-                                        <li id="search-result7-location">
-                                            <strong class="job-search__item-attributes-label">Location</strong>
-                                            <span class="job-search__item-attributes-value">University, East Midlands, Eastern, London, North East, North West, Scotland, South East, South West, Wales, West Midlands, Yorkshire and the Humber</span>
-                                        </li>
-
-                                        <li id="search-result7-numvacancies">
-                                            <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">20</span>
-                                        </li>
-                                        <li id="search-result7-grade">
-                                            <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Other</span>
-                                        </li>
-                                        <li id="search-result7-closingdate">
-                                            <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">3 September 2018</span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        </li>    <li class="job-search__item" id="search-result8">
-                            <div class="job-search__item-row">
-
-                                <div class="job-search__item-first">
-                                    <div class="job-search__item-image">
-
-                                        <img src="/public/images/logos/department/2-APHA.png" alt="Animal and Plant Health Agency">
-
-
-                                    </div>
-                                </div>
-
-                                <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result8-title">
-                                        <a href="/job/details/10149?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">HSO Scientific Advisor to Bovine TB Policy</a>
-                                    </h3>
-
-                                    <h4 class="sr-only">Job summary</h4>
-                                    <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result8-salary">
-                                            <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">£28,320 National, £31,600 London - £31,840 National, £35,530 London</span>
-                                        </li>
-
-                                        <li id="search-result8-location">
-                                            <strong class="job-search__item-attributes-label">Location</strong>
-                                            <span class="job-search__item-attributes-value">The job-holder can be based outside London but will need to be present in London 2 days a week</span>
-                                        </li>
-
-                                        <li id="search-result8-numvacancies">
-                                            <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">1</span>
-                                        </li>
-                                        <li id="search-result8-grade">
-                                            <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Higher Executive Officer</span>
-                                        </li>
-                                        <li id="search-result8-closingdate">
-                                            <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">27 August 2018</span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        </li>    <li class="job-search__item" id="search-result9">
-                            <div class="job-search__item-row">
-
-                                <div class="job-search__item-first">
-                                    <div class="job-search__item-image">
-
-                                        <img src="/public/images/logos/department/76-HMP&amp;PS.png" alt="HM Prison &amp; Probation Service">
-
-
-                                    </div>
-                                </div>
-
-                                <div class="job-search__item-last">
-
-                                    <h3 class="job-search__item-title" id="search-result9-title">
-                                        <a href="/job/details/9865?return_url=keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10">Probation Officer - LDU Somerset Cluster (Ref: 20074)</a>
-                                    </h3>
-
-                                    <h4 class="sr-only">Job summary</h4>
-                                    <ul class="job-search__item-attributes">
-
-
-                                        <li id="search-result9-salary">
-                                            <strong class="job-search__item-attributes-label">Salary</strong>
-                                            <span class="job-search__item-attributes-value">£29,038 - £36,084</span>
-                                        </li>
-
-                                        <li id="search-result9-location">
-                                            <strong class="job-search__item-attributes-label">Location</strong>
-                                            <span class="job-search__item-attributes-value">NPS 11 Canon Street <br>Taunton<br>TA1 1SN<br><br>NPS Queensway House <br>Weston-Super-Mare<br>BS22 7BB<br><br>NPS Riverside House <br>Bridgwater<br>TA6 3HW<br><br>NPS The Old Convent <br>Bath<br>BA2 4JE<br><br>National Probation Service<br>Yeovil<br>BA20 2QD</span>
-                                        </li>
-
-                                        <li id="search-result9-numvacancies">
-                                            <strong class="job-search__item-attributes-label">Number of jobs</strong>
-                                            <span class="job-search__item-attributes-value">4</span>
-                                        </li>
-                                        <li id="search-result9-grade">
-                                            <strong class="job-search__item-attributes-label">Grade</strong>
-                                            <span class="job-search__item-attributes-value">Other</span>
-                                        </li>
-                                        <li id="search-result9-closingdate">
-                                            <strong class="job-search__item-attributes-label">Closing date</strong>
-                                            <span class="job-search__item-attributes-value">13 August 2018</span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        </li></ul>
                     <nav class="pagination" aria-label="Pagination">
 
                         <ul class="pagination__list">
 
 
-                                <li class="pagination__list-item pagination__list-item--next">
-                                    <a href="/results?keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10&amp;page=2" aria-label="Go to next page">
-                                        <i class="icon ion-chevron-right" aria-hidden="true"></i>
-                                        Next <span class="pagination__hide-mobile">page</span> <span class="pagination__page-label">2 of 6</span>
-                                    </a>
-                                </li>
+                            <li class="pagination__list-item pagination__list-item--next">
+                                <a href="/results?keyword=&amp;location=klklklklk&amp;radius=30&amp;minSalary=&amp;maxSalary=&amp;filtered=true&amp;size=10&amp;page=2"
+                                   aria-label="Go to next page">
+                                    <i class="icon ion-chevron-right" aria-hidden="true"></i>
+                                    Next <span class="pagination__hide-mobile">page</span> <span
+                                        class="pagination__page-label">2 of 6</span>
+                                </a>
+                            </li>
 
                         </ul>
 
@@ -1074,20 +824,24 @@ Within
                     <div class="job-search__rpp">
                         <label for="rpp">Display results</label>
                         <select name="size" id="rpp" class="form-control form-control--width-auto js-submitOnChange">
-                                <option value="5">5 per page</option>
-                                <option value="10" selected="">10 per page</option>
-                                <option value="25">25 per page</option>
-                                <option value="50">50 per page</option>
+                            <option value="5">5 per page</option>
+                            <option value="10" selected="">10 per page</option>
+                            <option value="25">25 per page</option>
+                            <option value="50">50 per page</option>
                         </select>
                         <input type="submit" class="button" value="Change number of results">
                     </div>
 
 
+                </div>
             </div>
-    </div>
-  </div>
+        </div>
 
+<<<<<<< HEAD
 
+=======
+    </main>
+>>>>>>> 789abc7c1853ed00bbd6cc6aef5553ee9772cdef
 </div>
 
 {% endblock %}

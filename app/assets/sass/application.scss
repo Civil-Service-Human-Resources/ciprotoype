@@ -42,6 +42,23 @@ $govuk-global-styles: true;
   padding: 4px 4px 2px;
 }
 
+.job-search__item {
+  position: relative;
+
+  .internal {
+    background: #1e8feb;
+    position: absolute;
+    right: -38px;
+    color: white;
+    font-weight: 800;
+    padding: 23px 37px;
+    transform: rotate(45deg);
+    top: -10px;
+    font-size: 12px;
+    line-height: 9px;
+  }
+}
+
 
 // Local fixes to GOV.UK frontend
 
