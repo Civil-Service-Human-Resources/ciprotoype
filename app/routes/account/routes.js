@@ -251,9 +251,10 @@ module.exports = function (router) {
   // Notify user has been sent an activation link to their (GOV) email address
 
   router.get('/account/verify-cs-link-sent', function (req, res) {
-
+    console.log(req.query)
     if (req.session.data) {
       req.session.data.isGov = true
+      
       req.session.save(() => {
         console.log(req.session.data)
       })
