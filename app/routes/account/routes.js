@@ -104,7 +104,7 @@ module.exports = function(router) {
 
             'name': 'accountPassword',
             'id': 'accountPassword',
-            'label': 'Repeat password',
+            'label': 'Confirm password',
             'errorText': 'Please enter a valid password',
             'width': '20'
           }
@@ -238,7 +238,7 @@ req.session.destroy();
   router.get('/account/verify-cs', function(req, res) {
     res.render('layoutBuilder.html', {
       'layout': '2-0',
-      'h1': 'Verify your Civil Service or work email address',
+      'h1': 'Verify your Civil Service work email address',
 
       'form': {
         'action' : 'verify-cs-link-sent',
@@ -274,7 +274,7 @@ req.session.destroy();
       'layout': '2-1',
       'partial': 'account/emailVerify',
       'cs' : isCS,
-      'h1': 'Check your email',
+      'h1': 'Verification link sent',
 
       'form': {
         'action' : '../search',

@@ -47,7 +47,7 @@
 
 <a href="#" class="govuk-back-link">Back</a>
 
-<main class="govuk-main-wrapper">
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
@@ -71,13 +71,13 @@
                   <div class="search-filters" id="filterShowHide">
 
                     <div class="govuk-form-group">
-  <label class="govuk-label" for="email">
+  <label class="govuk-label" for="jobtitle">
     Keyword (optional)
   </label>
   <span id="email-hint" class="govuk-hint">
     Enter a job title or skill
   </span>
-  <input class="govuk-input" id="jobtitle" name="jobtitle" type="text" aria-describedby="job-title">
+  <input class="govuk-input" id="jobtitle" name="jobtitle" type="text" aria-describedby="jobtitle">
 </div>
 
 <div class="govuk-form-group">
@@ -89,10 +89,10 @@ Location (optional)
 </div>
 
 <div class="govuk-form-group">
-<label class="govuk-label" for="sort">
+<label class="govuk-label" for="radius">
 Within
 </label>
-                          <select name="radius" id="radius" class="govuk-select searchSidebar-modifier">
+                          <select name="radius" id="radius" class="govuk-select govuk-input--width-10 searchSidebar-modifier">
                                   <option value="5">5 miles</option>
                                   <option value="10">10 miles</option>
                                   <option value="15">15 miles</option>
@@ -103,12 +103,17 @@ Within
                       </div>
 
                       <div class="govuk-checkboxes">
+                      <fieldset class="govuk-fieldset">
 
-                              <legend class="govuk-fieldset__legend">Other location (optional)</legend>
+  <legend class="govuk-fieldset__legend">Other location (optional)</legend>
+
                                 <div class="govuk-checkboxes__item ">
+
                               <input id="overseas" name="overseas" class="govuk-checkboxes__input " type="checkbox" value="true" data-checked="false">
                               <label for="overseas" class="govuk-label govuk-checkboxes__label">Overseas jobs</label>
                           </div>
+                        </fieldset>
+
                       </div>
 
                       <details class="govuk-details">
@@ -122,9 +127,9 @@ Within
                           <label class="govuk-label" for="minSalary">
                           Minimum
                           </label>
-                                                    <select name="minSalary" id="minSalary" class="govuk-select searchSidebar-modifier">
-                                                      <option value="">No minimum</option><option value="10000">£10,000</option><
-                                                      option value="20000">£20,000</option><option value="30000">£30,000</option>
+                                                    <select name="minSalary" id="minSalary" class="govuk-select govuk-input--width-10 searchSidebar-modifier">
+                                                      <option value="">No minimum</option><option value="10000">£10,000</option>
+                                                      <option value="20000">£20,000</option><option value="30000">£30,000</option>
                                                       <option value="40000">£40,000</option><option value="50000">£50,000</option>
                                                       <option value="60000">£60,000</option><option value="70000">£70,000</option>
                                                       <option value="80000">£80,000</option><option value="90000">£90,000</option>
@@ -136,7 +141,7 @@ Within
                                                 <label class="govuk-label" for="maxSalary">
                                                 Maximum
                                                 </label>
-                                                                          <select name="maxSalary" id="maxSalary" class="govuk-select searchSidebar-modifier">
+                                                                          <select name="maxSalary" id="maxSalary" class="govuk-select govuk-input--width-10 searchSidebar-modifier">
                                                                             <option value="">No maximum</option><option value="10000">£10,000</option>
                                                                             <option value="20000">£20,000</option><option value="30000">£30,000</option>
                                                                             <option value="40000">£40,000</option><option value="50000">£50,000</option>
@@ -159,7 +164,7 @@ Within
                           <label class="govuk-label" for="department">
                           Department
                           </label>
-                                                    <select name="department" id="department" class="govuk-select searchSidebar-modifier">
+                                                    <select name="department" id="department" class="govuk-select govuk-input--width-sidebar searchSidebar-modifier">
                                                       <option value="">All departments</option>
                                                           <option value="1">Advisory, Conciliation and Arbitration Service</option>
                                                           <option value="2">Animal and Plant Health Agency</option>
@@ -1065,6 +1070,7 @@ Within
                         </ul>
 
                     </nav>
+
                     <div class="job-search__rpp">
                         <label for="rpp">Display results</label>
                         <select name="size" id="rpp" class="form-control form-control--width-auto js-submitOnChange">
@@ -1081,7 +1087,7 @@ Within
     </div>
   </div>
 
-</main>
+
 </div>
 
 {% endblock %}
