@@ -262,14 +262,8 @@ module.exports = function (router) {
     res.render('layoutBuilder.html', {
       'layout': '2-1',
       'partial': 'account/emailVerify',
-<<<<<<< HEAD
-      'cs' : isCS,
-      'h1': 'Verification link sent',
-=======
       'cs': true,
       'h1': 'Check your email',
->>>>>>> 789abc7c1853ed00bbd6cc6aef5553ee9772cdef
-
       'form': {
         'action': '../search',
         'inputs': [
