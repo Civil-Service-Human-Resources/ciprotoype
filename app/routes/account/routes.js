@@ -93,7 +93,7 @@ module.exports = function (router) {
 
             'name': 'accountPassword',
             'id': 'accountPassword',
-            'label': 'Repeat password',
+            'label': 'Confirm password',
             'errorText': 'Please enter a valid password',
             'width': '20'
           }
@@ -226,7 +226,7 @@ module.exports = function (router) {
   router.get('/account/verify-cs', function (req, res) {
     res.render('layoutBuilder.html', {
       'layout': '2-0',
-      'h1': 'Verify your Civil Service or work email address',
+      'h1': 'Verify your Civil Service work email address',
 
       'form': {
         'action': 'verify-cs-link-sent',
@@ -262,8 +262,13 @@ module.exports = function (router) {
     res.render('layoutBuilder.html', {
       'layout': '2-1',
       'partial': 'account/emailVerify',
+<<<<<<< HEAD
+      'cs' : isCS,
+      'h1': 'Verification link sent',
+=======
       'cs': true,
       'h1': 'Check your email',
+>>>>>>> 789abc7c1853ed00bbd6cc6aef5553ee9772cdef
 
       'form': {
         'action': '../search',
