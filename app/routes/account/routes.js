@@ -2,9 +2,13 @@
 
 module.exports = function (router) {
   router.get('/account/sign-in', function (req, res) {
+    let so = false
+    if (req.query.signedout) {
+      so = req.query.signedout
+    }
     res.render('layoutBuilder.html', {
+      'signedout': so,
       'layout': '2-0',
-    //  'partial': 'account/createAccountAdvice',
       'h1': 'Sign in to your account',
       'captionXL': 'Sign in to apply for jobs and view and manage your job applications',
 
@@ -31,12 +35,6 @@ module.exports = function (router) {
           'label': 'Password',
           'errorText': 'Please enter a valid password',
           'width': '20'
-        },
-        {
-          'type': 'hidden',
-          'id': 'hasSignedIn',
-          'name': 'hasSignedIn',
-          'value': true
         },
         {
           'type': 'html',
@@ -111,7 +109,7 @@ module.exports = function (router) {
       caName: req.query.caName,
       accountEmail: req.query.accountEmail,
       accountPassword: req.query.accountPassword,
-      isGov: false
+      isGov: false,
     }
 
     if (req.query.accountEmail.includes('.gov')) {
@@ -200,25 +198,6 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/account/sign-out', function (req, res) {
-    req.session.destroy()
-    res.render('layoutBuilder.html', {
-      'layout': '2-0',
-      'h1': 'Signed out',
-
-      'form': {
-        'action': '../search',
-        'inputs': [
-          {
-            'type': 'partial',
-            'path': '/account/signedOut'
-          }
-        ],
-        'buttonText': 'Search for jobs'
-      }
-    })
-  })
-
 // Verify a GOV email address for internal jobs
 
 // Ask for Gov or work related email address to send activation link to
@@ -251,7 +230,7 @@ module.exports = function (router) {
   // Notify user has been sent an activation link to their (GOV) email address
 
   router.get('/account/verify-cs-link-sent', function (req, res) {
-
+    console.log(req.query);
     if (req.session.data) {
       req.session.data.isGov = true
       req.session.save(() => {
