@@ -198,8 +198,6 @@ module.exports = function (router) {
     })
   })
 
-// Verify a GOV email address for internal jobs
-
 // Ask for Gov or work related email address to send activation link to
 
   router.get('/account/verify-cs', function (req, res) {
@@ -233,6 +231,7 @@ module.exports = function (router) {
     console.log(req.query);
     if (req.session.data) {
       req.session.data.isGov = true
+      
       req.session.save(() => {
         console.log(req.session.data)
       })
