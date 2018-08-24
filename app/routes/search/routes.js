@@ -1,24 +1,28 @@
 // Search
 module.exports = function (router) {
   router.get('/search', function (req, res) {
-
-    let emailAddress = false
-    let isGov = false
+    let sessionData = false
 
     if (req.session.data) {
-      isGov = req.session.data.isGov
-      emailAddress = req.session.data.accountEmail
+      sessionData = req.session.data
+      console.log(req.session.data)
+    }
+
+    if (req.query.accountPassword) {
+      sessionData = req.session.data = {
+        caName: 'Mr X',
+        accountEmail: req.query.accountEmail,
+        accountPassword: req.query.accountPassword,
+        isGov: req.query.accountEmail.includes('.gov') ? true : false
+      }
+
       req.session.save(() => {
-        console.log(req.session.data)
+        console.log(sessionData)
       })
     }
 
-    res.render('layoutBuilder.html', {
-
-      'h1': 'Job search',
-      'captionXL': 'Search and apply for jobs within the Civil Service and central government organisations',
-      'email': emailAddress,
-      'isGov': isGov,
+    res.render('search/index.html', {
+      'sessionData': sessionData,
       'form': {
         'action': '../search/results',
         'inputs': [
@@ -39,7 +43,6 @@ module.exports = function (router) {
             'errorText': 'You must enter a valid email address',
             'width': '20'
           }
-
         ],
 
         'buttonText': 'Search',

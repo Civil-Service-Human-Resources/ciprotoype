@@ -1,7 +1,6 @@
 
 const express = require('express')
 const router = express.Router()
-require('./routes/internal-jobs/routes')(router)
 require('./routes/search/routes')(router)
 require('./routes/account/routes')(router)
 require('./routes/test/routes')(router)

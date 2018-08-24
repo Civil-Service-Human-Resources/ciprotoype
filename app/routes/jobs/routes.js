@@ -3,6 +3,13 @@ const dummyResults = require('../../data/dummyResults.json')
 module.exports = function (router) {
   router.get('/job/:id', function (req, res) {
 
+    let sessionData = false
+
+    if (req.session.data) {
+      sessionData = req.session.data
+      console.log(req.session.data)
+    }
+
     const singleJob = () => {
       let j
       dummyResults.vacancies.content.forEach((job) => {
@@ -13,7 +20,8 @@ module.exports = function (router) {
       return j
     }
     res.render('jobs/details.html', {
-      'data': singleJob()
+      'data': singleJob(),
+      'sessionData': sessionData
     })
   })
 }

@@ -28,19 +28,17 @@
   {% include "includes/head.html" %}
 {% endblock %}
 
-{% block main %}
-  {{ super() }}
-{% endblock %}
-
 {% block pageTitle %}
   GOV.UK Prototype Kit
 {% endblock %}
+
+
 {% block header %}
   {# Set serviceName in config.js. #}
   <div class="app-cookie-banner js-cookie-banner">
     <p class="app-cookie-banner__message">{{cookieText | safe }}</p>
   </div>
-  {% if (data['hasSignedIn'])  %}
+  {% if sessionData.accountEmail  %}
 
 
   {{ govukHeader({
@@ -63,7 +61,7 @@
         text: "My account"
       },
       {
-        href: "/account/sign-out",
+        href: "/account/sign-in?signedout=true",
         text: "Sign out"
       }
     ]
@@ -93,6 +91,16 @@
 {% endif %}
 
 {% endblock %}
+
+
+
+{% block main %}
+{{ super() }}
+{% endblock %}
+
+
+
+
 
 {% block footer %}
   {{ govukFooter({
