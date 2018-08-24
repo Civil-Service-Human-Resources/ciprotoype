@@ -105,7 +105,7 @@ module.exports = function (router) {
   })
 
   router.get('/account/activation-code', function (req, res) {
-    req.session.data = {
+    let sessionData = req.session.data = {
       caName: req.query.caName,
       accountEmail: req.query.accountEmail,
       accountPassword: req.query.accountPassword,
@@ -117,12 +117,12 @@ module.exports = function (router) {
     }
 
     req.session.save(() => {
-      console.log(req.session.data);
       res.render('layoutBuilder.html', {
         'layout': '2-0',
+        'sessionData': sessionData,
         'h1': 'Activate your account',
         'form': {
-          'action': 'account-activated',
+          'action': '/search/results',
           'inputs': [
             {
               'type': 'partial',
@@ -164,9 +164,6 @@ module.exports = function (router) {
     })
   })
 
-// to do - currently form just validates regardless of Code
-// check the activation code
-
   router.get('/account/account-verification-check', function (req, res) {
     var emailAddress = req.session.data['accountEmail']
     var activationCode = req.session.data['activationCode']
@@ -178,8 +175,6 @@ module.exports = function (router) {
   })
 
   router.get('/account/account-activated', function (req, res) {
-    var emailAddress = req.session.data['accountEmail']
-    var activationCode = req.session.data['activationCode']
 
     res.render('layoutBuilder.html', {
       'layout': '2-0',
@@ -198,13 +193,19 @@ module.exports = function (router) {
     })
   })
 
-// Ask for Gov or work related email address to send activation link to
-
   router.get('/account/verify-cs', function (req, res) {
+
+    let sessionData = false
+
+    if (req.session.data) {
+      sessionData = req.session.data
+      console.log(req.session.data)
+    }
+
     res.render('layoutBuilder.html', {
       'layout': '2-0',
       'h1': 'Verify your Civil Service work email address',
-
+      'sessionData': sessionData,
       'form': {
         'action': 'verify-cs-link-sent',
         'inputs': [
@@ -225,31 +226,34 @@ module.exports = function (router) {
     })
   })
 
-  // Notify user has been sent an activation link to their (GOV) email address
-
   router.get('/account/verify-cs-link-sent', function (req, res) {
     console.log(req.query);
     if (req.session.data) {
       req.session.data.isGov = true
-      
       req.session.save(() => {
         console.log(req.session.data)
       })
     }
 
     res.render('layoutBuilder.html', {
+      'sessionData': req.session.data,
       'layout': '2-1',
       'partial': 'account/emailVerify',
       'cs': true,
       'h1': 'Check your email',
       'form': {
-        'action': '../search',
+        'action': '../search/results',
         'inputs': [
           {
             'type': 'partial',
             'path': 'account/verifyLink'
           },
-
+          {
+            'type': 'hidden',
+            'name': 'isCS',
+            'id': 'isCS',
+            'value': 'true'
+          },
           {
             'type': 'details',
             'summary': 'I haven\'t received my verification email',
@@ -264,8 +268,6 @@ module.exports = function (router) {
 
     })
   })
-
-// Message to say account has been verified - user can see internal jobs
 
   router.get('/account/verify-cs-verified', function (req, res) {
     res.render('layoutBuilder.html', {
