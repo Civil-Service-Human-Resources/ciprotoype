@@ -105,7 +105,7 @@ module.exports = function (router) {
   })
 
   router.get('/account/activation-code', function (req, res) {
-    let sessionData = req.session.data = {
+    req.session.data = {
       caName: req.query.caName,
       accountEmail: req.query.accountEmail,
       accountPassword: req.query.accountPassword,
@@ -119,7 +119,6 @@ module.exports = function (router) {
     req.session.save(() => {
       res.render('layoutBuilder.html', {
         'layout': '2-0',
-        'sessionData': sessionData,
         'h1': 'Activate your account',
         'form': {
           'action': '/search/results',
@@ -215,7 +214,8 @@ module.exports = function (router) {
             'id': 'csEmail',
             'name': 'csEmail',
             'label': 'Civil Service or work email address',
-            'hint': 'Enter your Civil Service email address or a recognised government email address'
+          //  'hint': 'Enter your Civil Service email address or a recognised government email address',
+            'width': '20'
           }
 
         ],

@@ -6,6 +6,9 @@
       <p class="signedIn">Welcome, {{ sessionData.accountEmail }} <a href="./account/sign-in?signedout=true">Sign out</a></p>
   {% endif %}
 
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+
     {% if messaging  %}
         <div class="notification-success">
             <p class="govuk-body-l">{{ messaging }}</p>
@@ -39,7 +42,8 @@
     </div>
     {% endif %}
 
-    <a href="#" class="govuk-back-link">Back</a>
+
+
 
     <main class="govuk-main-wrapper">
         <div class="govuk-grid-row">

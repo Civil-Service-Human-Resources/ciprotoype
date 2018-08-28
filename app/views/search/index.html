@@ -5,37 +5,43 @@
 {% endblock %}
 
 {% block content %}
+
+
+
   <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      {% if sessionData.accountEmail %}
+      <p class="signedIn">Welcome, {{ ssessionData.accountEmail }}. <a href="./account/sign-out">Sign out</a></p>
+      {% endif %}
+
+      {% if sessionData.isGov == false %}
+      <div class="notification-banner">
+          <div class="wrapper">
+              <p>
+                  <strong class="banner-heading">Want to see internal jobs?</strong>
+                  <a
+                          href="#"
+                          class="notification-banner__btn"
+                          data-analytics="trackEvent"
+                          data-analytics-category="user-research"
+                          data-analytics-action="Close banner"
+                  >Close</a>
+              </p>
+              <p>
+                  <a
+                          href="../account/verify-cs"
+                          data-analytics="trackEvent"
+                          data-analytics-category="user-research"
+                          data-analytics-action="View sign up to user research screen"
+                  >Verify your Civil Service email address</a>
+              </p>
+          </div>
+      </div>
+      {% endif %}
+    </div>
     <div class="govuk-grid-column-two-thirds">
 
-        {% if sessionData.accountEmail %}
-        <p class="signedIn">Welcome, {{ sessionData.accountEmail }}. <a href="./account/sign-in?signedout=true">Sign out</a></p>
-        {% endif %}
 
-        {% if sessionData.isGov == false %}
-        <div class="notification-banner">
-            <div class="wrapper">
-                <p>
-                    <strong class="banner-heading">Want to see internal jobs?</strong>
-                    <a
-                            href="#"
-                            class="notification-banner__btn"
-                            data-analytics="trackEvent"
-                            data-analytics-category="user-research"
-                            data-analytics-action="Close banner"
-                    >Close</a>
-                </p>
-                <p>
-                    <a
-                            href="../account/verify-cs"
-                            data-analytics="trackEvent"
-                            data-analytics-category="user-research"
-                            data-analytics-action="View sign up to user research screen"
-                    >Verify your Civil Service email address</a>
-                </p>
-            </div>
-        </div>
-        {% endif %}
 
         {% include "includes/form-builder/_renderer.html"%}
 
