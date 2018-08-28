@@ -2,6 +2,7 @@
 
 module.exports = function (router) {
   router.get('/account/sign-in', function (req, res) {
+    delete req.session.data
     let so = false
     if (req.query.signedout) {
       so = req.query.signedout
