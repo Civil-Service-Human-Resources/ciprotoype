@@ -7431,16 +7431,15 @@ p + .govuk-heading-s,
 }
 
 .job-search__item .internal {
-  background: #1e8feb;
+  background: #005ea5;
   position: absolute;
-  right: -38px;
+  right: 0px;
   color: white;
-  font-weight: 800;
-  padding: 23px 37px;
-  transform: rotate(45deg);
-  top: -10px;
-  font-size: 12px;
+  padding: 10px 10px;
+  top: 0px;
+  font-size: 14px;
   line-height: 9px;
+   font-family: "nta", Arial, sans-serif;
 }
 
 .markdown hr {
