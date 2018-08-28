@@ -215,7 +215,8 @@ module.exports = function (router) {
             'id': 'csEmail',
             'name': 'csEmail',
             'label': 'Civil Service or work email address',
-            'hint': 'Enter your Civil Service email address or a recognised government email address'
+          //  'hint': 'Enter your Civil Service email address or a recognised government email address',
+            'width': '20'
           }
 
         ],
