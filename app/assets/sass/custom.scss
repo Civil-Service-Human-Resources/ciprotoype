@@ -6,13 +6,6 @@
     font-style: normal
 }
 
-.ion,
-.ionicons,.ion-chevron-right:before, .ion-chevron-left:before{
-    content: "";
-}
-
-
-
 /* Job results filter */
 
 .job-search__rpp {
@@ -80,42 +73,53 @@ margin-bottom:32px;
 /* Pagination */
 .pagination__list {
     list-style: none;
-}
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
 
-.pagination__list-item {
-        font-size: 19px;
-        line-height: 1.31579;
+    i {
+        font-size: 60px;
     }
 
-.pagination__list-item {
-      font-family: "nta",Arial,sans-serif;
-      font-weight: 400;
-      text-transform: none;
-      font-size: 16px;
-      line-height: 1.25;
-      float: left;
-      width: 50%;
-}
+    a {
+        display: flex;
+        flex-direction: row;
+        text-decoration: none;
+        color: #005ea5;
 
-      .pagination__list-item--next {
-        float: right;
-        text-align: right;
+        .arrow-content {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            text-align: right;
+            padding: 12px 15px;
 
-}
-        .pagination__list-item--next a {
-        padding-left: 0;
-        padding-right: 33px;
+            &:last-child {
+                text-align: left;
+            }
+
+            p {
+                margin: 0;
+                color: #005ea5;
+            }
+        }
+
     }
 
-    .pagination__list-item a {
-    display: block;
-    line-height: 1.3;
-    padding: 15px 0 15px 33px;
-    position: relative;
-    text-decoration: none;
+    .pagination__list-item {
+        font-family: "nta",Arial,sans-serif;
+        font-weight: 400;
+        text-transform: none;
+        font-size: 16px;
+        line-height: 1.25;
+        width: 50%;
+    }
+
+    .pagination__page-label {
+        font-size: 14px;
+    }
 }
-
-
 
 
 .job-search__item-row,
