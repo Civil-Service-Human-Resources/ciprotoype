@@ -10,10 +10,10 @@ module.exports = function (router) {
 
     if (req.query.accountPassword) {
       sessionData = req.session.data = {
-        caName: 'Mr X',
+        caName: req.query.accountEmail,
         accountEmail: req.query.accountEmail,
         accountPassword: req.query.accountPassword,
-        isGov: req.query.accountEmail.includes('.gov') ? true : false
+        isGov: !!req.query.accountEmail.includes('gov')
       }
 
       req.session.save(() => {
@@ -53,5 +53,4 @@ module.exports = function (router) {
 
     )
   })
-
 }

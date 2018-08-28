@@ -110,11 +110,7 @@ module.exports = function (router) {
       caName: req.query.caName,
       accountEmail: req.query.accountEmail,
       accountPassword: req.query.accountPassword,
-      isGov: false,
-    }
-
-    if (req.query.accountEmail.includes('.gov')) {
-      req.session.data.isGov = true
+      isGov: !!req.query.accountEmail.includes('gov')
     }
 
     req.session.save(() => {
@@ -175,7 +171,6 @@ module.exports = function (router) {
   })
 
   router.get('/account/account-activated', function (req, res) {
-
     res.render('layoutBuilder.html', {
       'layout': '2-0',
       'h1': 'Acccount activated',
@@ -194,7 +189,6 @@ module.exports = function (router) {
   })
 
   router.get('/account/verify-cs', function (req, res) {
-
     let sessionData = false
 
     if (req.session.data) {
@@ -215,7 +209,7 @@ module.exports = function (router) {
             'id': 'csEmail',
             'name': 'csEmail',
             'label': 'Civil Service or work email address',
-          //  'hint': 'Enter your Civil Service email address or a recognised government email address',
+            //  'hint': 'Enter your Civil Service email address or a recognised government email address',
             'width': '20'
           }
 
@@ -228,7 +222,7 @@ module.exports = function (router) {
   })
 
   router.get('/account/verify-cs-link-sent', function (req, res) {
-    console.log(req.query);
+    console.log(req.query)
     if (req.session.data) {
       req.session.data.isGov = true
       req.session.save(() => {
