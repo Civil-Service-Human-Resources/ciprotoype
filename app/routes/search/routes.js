@@ -13,7 +13,7 @@ module.exports = function (router) {
         caName: req.query.accountEmail,
         accountEmail: req.query.accountEmail,
         accountPassword: req.query.accountPassword,
-        isGov: !!req.query.accountEmail.includes('gov')
+        isGov: !!req.query.accountEmail.includes('gov.uk')
       }
 
       req.session.save(() => {
