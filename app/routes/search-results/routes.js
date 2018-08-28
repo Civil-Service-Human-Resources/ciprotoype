@@ -16,7 +16,7 @@ module.exports = function (router) {
     }
 
     if (req.query.isCS) {
-      messaging = "You've successfully varified your Civil Service work email address"
+      messaging = "You've successfully verified your Civil Service work email address"
     }
 
     let correctResults = () => {

@@ -2,17 +2,17 @@
 
 {% block content %}
 <div class="govuk-width-container">
-
+  {% if sessionData.accountEmail  %}
+      <p class="signedIn">Welcome, {{ sessionData.accountEmail }} <a href="./account/sign-out">Sign out</a></p>
+  {% endif %}
 
     {% if messaging  %}
-        <div style="border: 3px solid green;">
-            <h1> {{ messaging }}</h1>
+        <div class="notification-success">
+            <p class="govuk-body-l">{{ messaging }}</p>
         </div>
     {% endif %}
 
-    {% if sessionData.accountEmail  %}
-        <p class="signedIn">Welcome, {{ sessionData.accountEmail }} <a href="./account/sign-out">Sign out</a></p>
-    {% endif %}
+
 
     {% if sessionData.isGov == false %}
     <div class="notification-banner">
@@ -60,6 +60,15 @@
                     </h2>
                     <div class="search-filters" id="filterShowHide">
 
+                      <div class="govuk-form-group">
+                          <label class="govuk-label" for="keyword">
+                              Keyword (optional)
+                          </label>
+
+                          <input class="govuk-input" id="location" name="keyword" type="text"
+                                 aria-describedby="location">
+                      </div>
+
                         <div class="govuk-form-group">
                             <label class="govuk-label" for="location">
                                 Location (optional)
@@ -69,11 +78,12 @@
                                    aria-describedby="location">
                         </div>
 
-                        <div class="govuk-form-group">
+                        <div class="govuk-form-group ">
                             <label class="govuk-label" for="sort">
                                 Within
                             </label>
-                            <select name="radius" id="radius" class="govuk-select">
+
+                            <select name="radius" id="radius" class="govuk-select searchSidebar-modifier govuk-input--width-sidebar">
                                 <option value="5">5 miles</option>
                                 <option value="10">10 miles</option>
                                 <option value="15">15 miles</option>
@@ -83,11 +93,11 @@
                             </select>
                         </div>
 
-                        <div class="govuk-checkboxes">
+                        <div class="govuk-checkboxes govuk-!-margin-bottom-5">
 
                             <legend class="govuk-fieldset__legend">Other location (optional)</legend>
                             <div class="govuk-checkboxes__item">
-                                <input id="overseas" name="overseas" class="govuk-checkboxes__input" type="checkbox"
+                                <input id="overseas" name="overseas" class="govuk-checkboxes__input searchSidebar-modifier" type="checkbox"
                                        value="true" data-checked="false">
                                 <label for="overseas" class="govuk-label govuk-checkboxes__label">Overseas jobs</label>
                             </div>
@@ -104,7 +114,7 @@
                                     <label class="govuk-label" for="minSalary">
                                         Minimum
                                     </label>
-                                    <select name="minSalary" id="minSalary" class="govuk-select">
+                                    <select name="minSalary" id="minSalary" class="govuk-select searchSidebar-modifier govuk-input--width-sidebar">
                                         <option value="">No minimum</option>
                                         <option value="10000">£10,000</option>
                                         <
@@ -124,7 +134,7 @@
                                     <label class="govuk-label" for="maxSalary">
                                         Maximum
                                     </label>
-                                    <select name="maxSalary" id="maxSalary" class="govuk-select">
+                                    <select name="maxSalary" id="maxSalary" class="govuk-select searchSidebar-modifier govuk-input--width-sidebar">
                                         <option value="">No maximum</option>
                                         <option value="10000">£10,000</option>
                                         <option value="20000">£20,000</option>
@@ -142,7 +152,7 @@
                         </details>
 
 
-                        
+
                         <details class="govuk-details">
             <summary class="govuk-details__summary">
               <span class="govuk-details__summary-text">
@@ -154,7 +164,7 @@
               <label class="govuk-label" for="department">
               Department
               </label>
-                                        <select name="department" id="department" class="govuk-select">
+                                        <select name="department" id="department" class="govuk-select searchSidebar-modifier govuk-input--width-sidebar">
                                           <option value="">All departments</option>
                                               <option value="1">Advisory, Conciliation and Arbitration Service</option>
                                               <option value="2">Animal and Plant Health Agency</option>
@@ -346,7 +356,7 @@
                         <input type="hidden" name="filtered" value="true">
 
                         <div class="form-group">
-                            <input type="submit" class="button" value="Update results">
+                            <input type="submit"  class="govuk-button" value="Update results">
                         </div>
 
                     </div>
