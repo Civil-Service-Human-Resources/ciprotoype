@@ -3,7 +3,7 @@
 {% block content %}
 <div class="govuk-width-container">
   {% if sessionData.accountEmail  %}
-      <p class="signedIn">Welcome, {{ sessionData.accountEmail }} <a href="./account/sign-out">Sign out</a></p>
+      <p class="signedIn">Welcome, {{ sessionData.accountEmail }} <a href="./account/sign-in?signedout=true">Sign out</a></p>
   {% endif %}
 
     {% if messaging  %}

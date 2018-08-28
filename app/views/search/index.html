@@ -9,7 +9,7 @@
     <div class="govuk-grid-column-two-thirds">
 
         {% if sessionData.accountEmail %}
-        <p class="signedIn">Welcome, {{ sessionData.caName }}. <a href="./account/sign-out">Sign out</a></p>
+        <p class="signedIn">Welcome, {{ sessionData.accountEmail }}. <a href="./account/sign-in?signedout=true">Sign out</a></p>
         {% endif %}
 
         {% if sessionData.isGov == false %}
