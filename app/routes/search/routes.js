@@ -23,6 +23,8 @@ module.exports = function (router) {
 
     res.render('search/index.html', {
       'sessionData': sessionData,
+      'h1' : 'Job search',
+      'captionXL' : 'Search and apply for jobs within the Civil Service and central government organisations',
       'form': {
         'action': '../search/results',
         'inputs': [
