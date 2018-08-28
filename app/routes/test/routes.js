@@ -62,7 +62,7 @@ res.render('layoutBuilder.html',{
 router.get('/test/output/', function (req, res) {
 
 var emailAddress = req.session.data['accountEmail']
-var isCS = emailAddress.includes('gov');
+var isCS = emailAddress.includes('gov.uk');
 
 
 res.render('test/output.html',{
