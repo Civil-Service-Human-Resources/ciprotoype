@@ -116,6 +116,16 @@ margin-bottom:32px;
 }
 
 
+.job-search__rpp {
+    margin-bottom: 30px;
+    padding-top: 15px;
+    text-align: center;
+  }
+  .job-search__rpp:before, .job-search__rpp:after {
+      content: " ";
+      display: table;
+  }
+
 
 
 .job-search__item-row,
