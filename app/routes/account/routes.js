@@ -12,15 +12,11 @@ module.exports = function (router) {
       'layout': '2-1',
       'partial' : 'account/createAccountAdvice',
       'h1': 'Sign in to your account',
-      'captionXL': 'Sign in to apply for jobs and view and manage your job applications',
+
 
       'form': {
         'action': '../search',
-        'inputs': [{
-          'type': 'html',
-          'html': '<p class="govuk-body">Sign in or <a class="govuk-link" href="create-account">create an account</a> to get started.</p>'
-
-        },
+        'inputs': [
         {
           'type': 'text',
           'name': 'accountEmail',
@@ -56,7 +52,7 @@ module.exports = function (router) {
     res.render('layoutBuilder.html', {
 
       'layout': '2-0',
-      'h1': 'Create an account',
+      'h1': 'Create account',
       'form': {
         'action': 'activation-code',
         'inputs': [
@@ -116,6 +112,7 @@ module.exports = function (router) {
 
     req.session.save(() => {
       res.render('layoutBuilder.html', {
+        'sessionData': req.session.data,
         'layout': '2-0',
         'h1': 'Activate your account',
         'form': {
