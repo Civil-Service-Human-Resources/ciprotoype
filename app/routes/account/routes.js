@@ -233,8 +233,7 @@ module.exports = function (router) {
 
     res.render('layoutBuilder.html', {
       'sessionData': req.session.data,
-      'layout': '2-1',
-      'partial': 'account/emailVerify',
+      'layout': '2-0',
       'cs': true,
       'h1': 'Check your email',
       'form': {
