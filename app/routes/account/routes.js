@@ -232,7 +232,7 @@ module.exports = function (router) {
       'sessionData': req.session.data,
       'layout': '2-0',
       'cs': true,
-      'h1': 'Check your email',
+      'h1': 'Verification link sent',
       'form': {
         'action': '../search/results',
         'inputs': [
