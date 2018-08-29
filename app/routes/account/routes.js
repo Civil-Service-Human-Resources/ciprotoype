@@ -55,10 +55,10 @@ module.exports = function (router) {
   router.get('/account/validation', function (req, res) {
 
     const errors = {
-      'name': (!!req.query.caName),
-      'password': (!!req.query.accountPassword),
-      'confirmPassword': (!!req.query.accountConfirmPassword),
-      'email': (!!req.query.accountEmail)
+      'name': (req.query.caName ? req.query.caName : false),
+      'password': (req.query.accountPassword ? req.query.accountPassword : false),
+      'confirmPassword': (req.query.accountConfirmPassword ? req.query.accountConfirmPassword : false),
+      'email': (req.query.accountEmail ? req.query.accountEmail : false)
     }
 
     //console.log(JSON.stringify(errors));
@@ -69,9 +69,12 @@ module.exports = function (router) {
   })
 
   router.get('/account/create-account', function (req, res) {
+    let formErrors;
     if (req.query.errors) {
-      console.log(JSON.parse(req.query.errors).name)
+      console.log(JSON.parse(req.query.errors))
+      formErrors = JSON.parse(req.query.errors)
     }
+
     res.render('layoutBuilder.html', {
 
       'layout': '2-0',
@@ -86,9 +89,10 @@ module.exports = function (router) {
             'name': 'caName',
             'id': 'caName',
             'label': 'Full name',
-            'errorText': (!JSON.parse(req.query.errors).name ? 'You must enter a name' : undefined),
+            'errorText': formErrors ? (!formErrors.name ? 'You must enter a name' : undefined) : undefined,
             'width': '20',
-            'required': 'true'
+            'required': 'true',
+            'value': formErrors ? (formErrors.name ? formErrors.name : undefined) : undefined
           },
 
           {
@@ -97,7 +101,7 @@ module.exports = function (router) {
             'id': 'accountEmail',
             'label': 'Email address',
             'hint': 'If you are a civil servant and you would like to view and apply for internal jobs, we recommend you create an account with your work email address',
-            'errorText': (!JSON.parse(req.query.errors).email ? 'You must enter a valid email address' : undefined),
+            'errorText': formErrors ? (!formErrors.email ? 'You must enter a valid email address' : undefined) : undefined,
             'width': '20',
             'required': 'true'
           },
@@ -107,7 +111,7 @@ module.exports = function (router) {
             'hint': 'Your password must be at least eight characters including at least one uppercase letter, one special character and one number',
             'id': 'accountPassword',
             'label': 'Password',
-            'errorText': (!JSON.parse(req.query.errors).password ? 'Please enter a valid password' : undefined),
+            'errorText': formErrors ? (!formErrors.password ? 'Please enter a valid password' : undefined) : undefined,
             'width': '20',
             'required': 'true'
           },
@@ -116,7 +120,7 @@ module.exports = function (router) {
             'name': 'accountConfirmPassword',
             'id': 'accountConfirmPassword',
             'label': 'Confirm password',
-            'errorText': (!JSON.parse(req.query.errors).confirmPassword ? 'Please enter a valid password' : undefined),
+            'errorText': formErrors ? (!formErrors.confirmPassword ? 'Please enter a valid password' : undefined) : undefined,
             'width': '20',
             'required': 'true'
           }
