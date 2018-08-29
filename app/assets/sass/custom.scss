@@ -176,7 +176,6 @@ margin-bottom:32px;
             }
         }
 
-<<<<<<< HEAD
 .job-search__rpp {
     margin-bottom: 30px;
     padding-top: 15px;
@@ -187,7 +186,6 @@ margin-bottom:32px;
       display: table;
   }
 
-=======
         .job-search__item-attributes-label {
             display: block;
         }
@@ -220,21 +218,7 @@ margin-bottom:32px;
         }
     }
 
-    &__rpp {
-        margin-bottom: $gutter;
-        padding-top: $gutter-half;
-        text-align: center;
-
-        label,
-        select,
-        input {
-            display: inline-block;
-            margin: 0;
-            vertical-align: middle;
-        }
-    }
 }
->>>>>>> e1d099098f890392a206b39f87b67512dce06e95
 
 
 .job-search__item-row,
@@ -688,14 +672,13 @@ margin-bottom:32px;
 
 @media (min-width: 768px) {
     .job-search__total-results {
-        float: right;
-        width: calc(60.5% - 40px)
+
     }
 }
 
 @media (min-width: 960px) {
     .job-search__total-results {
-        width: calc(74.5% - 40px)
+
     }
 }
 
@@ -1526,14 +1509,13 @@ margin-bottom:32px;
 
 @media (min-width: 768px) {
     .job-search__total-results {
-        float: right;
-        width: calc(60.5% - 40px)
+
     }
 }
 
 @media (min-width: 960px) {
     .job-search__total-results {
-        width: calc(74.5% - 40px)
+
     }
 }
 

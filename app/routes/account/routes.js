@@ -9,7 +9,8 @@ module.exports = function (router) {
     }
     res.render('layoutBuilder.html', {
       'signedout': so,
-      'layout': '2-0',
+      'layout': '2-1',
+      'partial' : 'account/createAccountAdvice',
       'h1': 'Sign in to your account',
       'captionXL': 'Sign in to apply for jobs and view and manage your job applications',
 
@@ -39,7 +40,7 @@ module.exports = function (router) {
         },
         {
           'type': 'html',
-          'html': '<p class="govuk-body"><a class="govuk-link" href="recover-account">I can\'t acccess my account</a></p>'
+          'html': '<p class="govuk-body"><a class="govuk-link" href="recover-account">I can\'t access my account</a></p>'
         }
 
         ],
