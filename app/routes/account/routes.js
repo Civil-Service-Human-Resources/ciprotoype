@@ -26,7 +26,6 @@ module.exports = function (router) {
           'name': 'accountEmail',
           'id': 'accountEmail',
           'label': 'Email address',
-          'errorText': 'You must enter a valid email address',
           'width': '20'
         },
         {
@@ -35,7 +34,6 @@ module.exports = function (router) {
           'name': 'accountPassword',
           'id': 'accountPassword',
           'label': 'Password',
-          'errorText': 'Please enter a valid password',
           'width': '20'
         },
         {
@@ -54,25 +52,24 @@ module.exports = function (router) {
 
   router.get('/account/validation', function (req, res) {
 
-    const errors = {
+    const inputs = {
       'name': (req.query.caName ? req.query.caName : false),
       'password': (req.query.accountPassword ? req.query.accountPassword : false),
       'confirmPassword': (req.query.accountConfirmPassword ? req.query.accountConfirmPassword : false),
       'email': (req.query.accountEmail ? req.query.accountEmail : false)
     }
 
-    //console.log(JSON.stringify(errors));
-
-    if (!errors.name || !errors.password || !errors.confirmPassword || !errors.email) {
-      res.redirect(`/account/create-account?errors=${JSON.stringify(errors)}`)
+    if (!inputs.name || !inputs.password || !inputs.confirmPassword || !inputs.email) {
+      res.redirect(`/account/create-account?inputs=${JSON.stringify(inputs)}`)
+    } else {
+      res.redirect(`/account/activation-code?caName=${req.query.caName}&accountEmail=${req.query.accountEmail}&accountPassword=${req.query.accountPassword}`)
     }
   })
 
   router.get('/account/create-account', function (req, res) {
-    let formErrors;
-    if (req.query.errors) {
-      console.log(JSON.parse(req.query.errors))
-      formErrors = JSON.parse(req.query.errors)
+    let formInputs;
+    if (req.query.inputs) {
+      formInputs = JSON.parse(req.query.inputs)
     }
 
     res.render('layoutBuilder.html', {
@@ -80,7 +77,6 @@ module.exports = function (router) {
       'layout': '2-0',
       'h1': 'Create an account',
       'form': {
-        // 'action': 'activation-code',
         'action': 'validation',
         'inputs': [
 
@@ -89,10 +85,10 @@ module.exports = function (router) {
             'name': 'caName',
             'id': 'caName',
             'label': 'Full name',
-            'errorText': formErrors ? (!formErrors.name ? 'You must enter a name' : undefined) : undefined,
+            'errorText': formInputs ? (!formInputs.name ? 'You must enter a name' : undefined) : undefined,
             'width': '20',
             'required': 'true',
-            'value': formErrors ? (formErrors.name ? formErrors.name : undefined) : undefined
+            'value': formInputs ? (formInputs.name ? formInputs.name : undefined) : undefined
           },
 
           {
@@ -101,9 +97,10 @@ module.exports = function (router) {
             'id': 'accountEmail',
             'label': 'Email address',
             'hint': 'If you are a civil servant and you would like to view and apply for internal jobs, we recommend you create an account with your work email address',
-            'errorText': formErrors ? (!formErrors.email ? 'You must enter a valid email address' : undefined) : undefined,
+            'errorText': formInputs ? (!formInputs.email ? 'You must enter a valid email address' : undefined) : undefined,
             'width': '20',
-            'required': 'true'
+            'required': 'true',
+            'value': formInputs ? (formInputs.email ? formInputs.email : undefined) : undefined
           },
           {
             'type': 'password',
@@ -111,18 +108,20 @@ module.exports = function (router) {
             'hint': 'Your password must be at least eight characters including at least one uppercase letter, one special character and one number',
             'id': 'accountPassword',
             'label': 'Password',
-            'errorText': formErrors ? (!formErrors.password ? 'Please enter a valid password' : undefined) : undefined,
+            'errorText': formInputs ? (!formInputs.password ? 'Please enter a valid password' : undefined) : undefined,
             'width': '20',
-            'required': 'true'
+            'required': 'true',
+            'value': formInputs ? (formInputs.password ? formInputs.password : undefined) : undefined
           },
           {
             'type': 'password',
             'name': 'accountConfirmPassword',
             'id': 'accountConfirmPassword',
             'label': 'Confirm password',
-            'errorText': formErrors ? (!formErrors.confirmPassword ? 'Please enter a valid password' : undefined) : undefined,
+            'errorText': formInputs ? (!formInputs.confirmPassword ? 'Please enter a valid password' : undefined) : undefined,
             'width': '20',
-            'required': 'true'
+            'required': 'true',
+            'value': formInputs ? (formInputs.confirmPassword ? formInputs.confirmPassword : undefined) : undefined
           }
 
         ],
@@ -158,7 +157,6 @@ module.exports = function (router) {
               'name': 'activationCode',
               'id': 'accountEmail',
               'label': 'Activation code',
-              'errorText': 'Invalid activation code',
               'width': '20'
             },
             {
