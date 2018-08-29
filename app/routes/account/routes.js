@@ -10,7 +10,7 @@ module.exports = function (router) {
     res.render('layoutBuilder.html', {
       'signedout': so,
       'layout': '2-1',
-      'partial' : 'account/createAccountAdvice',
+      'partial': 'account/createAccountAdvice',
       'h1': 'Sign in to your account',
       'captionXL': 'Sign in to apply for jobs and view and manage your job applications',
 
@@ -52,13 +52,33 @@ module.exports = function (router) {
     })
   })
 
+  router.get('/account/validation', function (req, res) {
+
+    const errors = {
+      'name': (!!req.query.caName),
+      'password': (!!req.query.accountPassword),
+      'confirmPassword': (!!req.query.accountConfirmPassword),
+      'email': (!!req.query.accountEmail)
+    }
+
+    //console.log(JSON.stringify(errors));
+
+    if (!errors.name || !errors.password || !errors.confirmPassword || !errors.email) {
+      res.redirect(`/account/create-account?errors=${JSON.stringify(errors)}`)
+    }
+  })
+
   router.get('/account/create-account', function (req, res) {
+    if (req.query.errors) {
+      console.log(JSON.parse(req.query.errors).name)
+    }
     res.render('layoutBuilder.html', {
 
       'layout': '2-0',
       'h1': 'Create an account',
       'form': {
-        'action': 'activation-code',
+        // 'action': 'activation-code',
+        'action': 'validation',
         'inputs': [
 
           {
@@ -66,8 +86,9 @@ module.exports = function (router) {
             'name': 'caName',
             'id': 'caName',
             'label': 'Full name',
-            'errorText': 'You must enter a name',
-            'width': '20'
+            'errorText': (!JSON.parse(req.query.errors).name ? 'You must enter a name' : undefined),
+            'width': '20',
+            'required': 'true'
           },
 
           {
@@ -76,8 +97,9 @@ module.exports = function (router) {
             'id': 'accountEmail',
             'label': 'Email address',
             'hint': 'If you are a civil servant and you would like to view and apply for internal jobs, we recommend you create an account with your work email address',
-            'errorText': 'You must enter a valid email address',
-            'width': '20'
+            'errorText': (!JSON.parse(req.query.errors).email ? 'You must enter a valid email address' : undefined),
+            'width': '20',
+            'required': 'true'
           },
           {
             'type': 'password',
@@ -85,17 +107,18 @@ module.exports = function (router) {
             'hint': 'Your password must be at least eight characters including at least one uppercase letter, one special character and one number',
             'id': 'accountPassword',
             'label': 'Password',
-            'errorText': 'Please enter a valid password',
-            'width': '20'
+            'errorText': (!JSON.parse(req.query.errors).password ? 'Please enter a valid password' : undefined),
+            'width': '20',
+            'required': 'true'
           },
           {
             'type': 'password',
-
-            'name': 'accountPassword',
-            'id': 'accountPassword',
+            'name': 'accountConfirmPassword',
+            'id': 'accountConfirmPassword',
             'label': 'Confirm password',
-            'errorText': 'Please enter a valid password',
-            'width': '20'
+            'errorText': (!JSON.parse(req.query.errors).confirmPassword ? 'Please enter a valid password' : undefined),
+            'width': '20',
+            'required': 'true'
           }
 
         ],
