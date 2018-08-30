@@ -1,4 +1,5 @@
 // Search
+const utils = require('../../../lib/utils.js')
 
 module.exports = function (router) {
   router.get('/account/sign-in', function (req, res) {
@@ -50,40 +51,8 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/validation', (req, res) => {
-    let allowed = true
-    const inputs = {}
-    const url = req.headers.referer.split('?')[0]
-    let success = '?'
-    const items = Object.keys(req.query).map((item) => {
-      return {'input': item, 'value': req.query[item]}
-    })
-
-    items.forEach((item, index) => {
-      inputs[item.input] = item.value
-      if (item.value === '') {
-        allowed = false
-      }
-      if (item.input !== 'destination') {
-        success += `${item.input}=${item.value}&`
-      }
-      if ((index + 1) === items.length) {
-        if (!allowed) {
-          // Send back to original page
-          res.redirect(`${url}?inputs=${JSON.stringify(inputs)}`)
-        } else {
-          // Send back to next page
-          res.redirect(`${req.query.destination}${success}`)
-        }
-      }
-    })
-  })
-
   router.get('/account/create-account', function (req, res) {
-    let formInputs = false
-    if (req.query.inputs) {
-      formInputs = JSON.parse(req.query.inputs)
-    }
+    let formInputs = utils.getFormInputs(req.query)
 
     res.render('layoutBuilder.html', {
 
@@ -150,31 +119,42 @@ module.exports = function (router) {
   })
 
   router.get('/account/activation-code', function (req, res) {
-    req.session.data = {
-      caName: req.query.caName,
-      accountEmail: req.query.accountEmail,
-      accountPassword: req.query.accountPassword,
-      isGov: !!req.query.accountEmail.includes('gov.uk')
+    if (req.query.accountEmail) {
+      req.session.data = {
+        caName: req.query.caName,
+        accountEmail: req.query.accountEmail,
+        accountPassword: req.query.accountPassword,
+        isGov: utils.isGovEmail(req.query.accountEmail)
+      }
     }
+
+    let formInputs = utils.getFormInputs(req.query)
 
     req.session.save(() => {
       res.render('layoutBuilder.html', {
         'layout': '2-0',
         'h1': 'Activate your account',
         'form': {
-          'action': '/search/results',
+          'action': req.get('host') + '/validation',
           'inputs': [
+            {
+              'type': 'hidden',
+              'name': 'destination',
+              'id': 'destination',
+              'value': '/search/results'
+            },
             {
               'type': 'partial',
               'path': '/account/activationCode'
             },
-
             {
               'type': 'text',
               'name': 'activationCode',
               'id': 'accountEmail',
               'label': 'Activation code',
-              'width': '20'
+              'width': '20',
+              'errorText': formInputs ? (!formInputs.accountEmail ? 'Please enter a valid activation code' : undefined) : undefined,
+              'value': formInputs ? (formInputs.accountEmail ? formInputs.accountEmail : undefined) : undefined
             },
             {
               'type': 'hidden',
@@ -203,16 +183,6 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/account/account-verification-check', function (req, res) {
-    var emailAddress = req.session.data['accountEmail']
-    var activationCode = req.session.data['activationCode']
-    switch (activationCode) {
-      case '123456':
-        res.redirect('/account/account-activated')
-        break
-    }
-  })
-
   router.get('/account/account-activated', function (req, res) {
     res.render('layoutBuilder.html', {
       'layout': '2-0',
@@ -239,90 +209,34 @@ module.exports = function (router) {
       console.log(req.session.data)
     }
 
+    let formInputs = utils.getFormInputs(req.query)
+
     res.render('layoutBuilder.html', {
       'layout': '2-0',
       'h1': 'Verify your Civil Service work email address',
       'sessionData': sessionData,
       'form': {
-        'action': 'verify-cs-link-sent',
+        'action': req.get('host') + '/validation',
         'inputs': [
-
+          {
+            'type': 'hidden',
+            'name': 'destination',
+            'id': 'destination',
+            'value': 'account/verify-cs-link-sent'
+          },
           {
             'type': 'text',
             'id': 'csEmail',
             'name': 'csEmail',
             'label': 'Civil Service or work email address',
-            //  'hint': 'Enter your Civil Service email address or a recognised government email address',
-            'width': '20'
+            'hint': 'Enter your Civil Service email address or a recognised government email address',
+            'width': '20',
+            'errorText': formInputs ? (!formInputs.csEmail ? 'Please enter a valid email' : undefined) : undefined,
+            'value': formInputs ? (formInputs.csEmail ? formInputs.csEmail : undefined) : undefined
           }
 
         ],
         'buttonText': 'Verify your email address'
-
-      }
-
-    })
-  })
-
-  router.get('/account/verify-cs-link-sent', function (req, res) {
-    console.log(req.query)
-    if (req.session.data) {
-      req.session.data.isGov = true
-      req.session.save(() => {
-        console.log(req.session.data)
-      })
-    }
-
-    res.render('layoutBuilder.html', {
-      'sessionData': req.session.data,
-      'layout': '2-0',
-      'cs': true,
-      'h1': 'Check your email',
-      'form': {
-        'action': '../search/results',
-        'inputs': [
-          {
-            'type': 'partial',
-            'path': 'account/verifyLink'
-          },
-          {
-            'type': 'hidden',
-            'name': 'isCS',
-            'id': 'isCS',
-            'value': 'true'
-          },
-          {
-            'type': 'details',
-            'summary': 'I haven\'t received my verification email',
-            'text': '<p class="govuk-body">It may take a few minutes for the email to arrive. Please check your email spam  or junk mail folder. If you still haven\t received your email after a short while, you can  <a href="#">re-send a verification link</a>.'
-          }
-
-        ],
-
-        'buttonText': 'Search for a job'
-
-      }
-
-    })
-  })
-
-  router.get('/account/verify-cs-verified', function (req, res) {
-    res.render('layoutBuilder.html', {
-      'layout': '2-0',
-
-      'h1': 'Your Civil Service email account has been verified',
-
-      'form': {
-        'action': '../search',
-        'inputs': [
-
-          {
-            'type': 'partial',
-            'path': 'account/emailVerified'
-          }
-
-        ],
-        'buttonText': 'Search for jobs'
 
       }
 
