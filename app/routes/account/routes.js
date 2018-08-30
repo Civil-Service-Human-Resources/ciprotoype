@@ -50,24 +50,37 @@ module.exports = function (router) {
     })
   })
 
-  router.get('/account/validation', function (req, res) {
+  router.get('/validation', (req, res) => {
+    let allowed = true
+    const inputs = {}
+    const url = req.headers.referer.split('?')[0]
+    let success = '?'
+    const items = Object.keys(req.query).map((item) => {
+      return {'input': item, 'value': req.query[item]}
+    })
 
-    const inputs = {
-      'name': (req.query.caName ? req.query.caName : false),
-      'password': (req.query.accountPassword ? req.query.accountPassword : false),
-      'confirmPassword': (req.query.accountConfirmPassword ? req.query.accountConfirmPassword : false),
-      'email': (req.query.accountEmail ? req.query.accountEmail : false)
-    }
-
-    if (!inputs.name || !inputs.password || !inputs.confirmPassword || !inputs.email) {
-      res.redirect(`/account/create-account?inputs=${JSON.stringify(inputs)}`)
-    } else {
-      res.redirect(`/account/activation-code?caName=${req.query.caName}&accountEmail=${req.query.accountEmail}&accountPassword=${req.query.accountPassword}`)
-    }
+    items.forEach((item, index) => {
+      inputs[item.input] = item.value
+      if (item.value === '') {
+        allowed = false
+      }
+      if (item.input !== 'destination') {
+        success += `${item.input}=${item.value}&`
+      }
+      if ((index + 1) === items.length) {
+        if (!allowed) {
+          // Send back to original page
+          res.redirect(`${url}?inputs=${JSON.stringify(inputs)}`)
+        } else {
+          // Send back to next page
+          res.redirect(`${req.query.destination}${success}`)
+        }
+      }
+    })
   })
 
   router.get('/account/create-account', function (req, res) {
-    let formInputs;
+    let formInputs = false
     if (req.query.inputs) {
       formInputs = JSON.parse(req.query.inputs)
     }
@@ -77,30 +90,34 @@ module.exports = function (router) {
       'layout': '2-0',
       'h1': 'Create an account',
       'form': {
-        'action': 'validation',
+        'action': req.get('host') + '/validation',
         'inputs': [
-
+          {
+            'type': 'hidden',
+            'name': 'destination',
+            'id': 'destination',
+            'value': '/account/activation-code'
+          },
           {
             'type': 'text',
             'name': 'caName',
             'id': 'caName',
             'label': 'Full name',
-            'errorText': formInputs ? (!formInputs.name ? 'You must enter a name' : undefined) : undefined,
+            'errorText': formInputs ? (!formInputs.caName ? 'You must enter a name' : undefined) : undefined,
             'width': '20',
             'required': 'true',
-            'value': formInputs ? (formInputs.name ? formInputs.name : undefined) : undefined
+            'value': formInputs ? (formInputs.caName ? formInputs.caName : undefined) : undefined
           },
-
           {
             'type': 'text',
             'name': 'accountEmail',
             'id': 'accountEmail',
             'label': 'Email address',
             'hint': 'If you are a civil servant and you would like to view and apply for internal jobs, we recommend you create an account with your work email address',
-            'errorText': formInputs ? (!formInputs.email ? 'You must enter a valid email address' : undefined) : undefined,
+            'errorText': formInputs ? (!formInputs.accountEmail ? 'You must enter a valid email address' : undefined) : undefined,
             'width': '20',
             'required': 'true',
-            'value': formInputs ? (formInputs.email ? formInputs.email : undefined) : undefined
+            'value': formInputs ? (formInputs.accountEmail ? formInputs.accountEmail : undefined) : undefined
           },
           {
             'type': 'password',
@@ -108,20 +125,20 @@ module.exports = function (router) {
             'hint': 'Your password must be at least eight characters including at least one uppercase letter, one special character and one number',
             'id': 'accountPassword',
             'label': 'Password',
-            'errorText': formInputs ? (!formInputs.password ? 'Please enter a valid password' : undefined) : undefined,
+            'errorText': formInputs ? (!formInputs.accountPassword ? 'Please enter a valid password' : undefined) : undefined,
             'width': '20',
             'required': 'true',
-            'value': formInputs ? (formInputs.password ? formInputs.password : undefined) : undefined
+            'value': formInputs ? (formInputs.accountPassword ? formInputs.accountPassword : undefined) : undefined
           },
           {
             'type': 'password',
             'name': 'accountConfirmPassword',
             'id': 'accountConfirmPassword',
             'label': 'Confirm password',
-            'errorText': formInputs ? (!formInputs.confirmPassword ? 'Please enter a valid password' : undefined) : undefined,
+            'errorText': formInputs ? (!formInputs.accountConfirmPassword ? 'Please enter a valid password' : undefined) : undefined,
             'width': '20',
             'required': 'true',
-            'value': formInputs ? (formInputs.confirmPassword ? formInputs.confirmPassword : undefined) : undefined
+            'value': formInputs ? (formInputs.accountConfirmPassword ? formInputs.accountConfirmPassword : undefined) : undefined
           }
 
         ],
