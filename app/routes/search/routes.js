@@ -34,7 +34,6 @@ module.exports = function (router) {
             'id': 'keyword',
             'label': 'Keyword (optional)',
             'hint': 'Enter a job title or skill',
-            'errorText': 'You must enter a valid email address',
             'width': '20'
           },
           {
@@ -42,7 +41,6 @@ module.exports = function (router) {
             'name': 'location',
             'id': 'location',
             'label': 'Location (optional)',
-            'errorText': 'You must enter a valid email address',
             'width': '20'
           }
         ],
