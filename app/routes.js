@@ -7,6 +7,7 @@ require('./routes/test/routes')(router)
 require('./routes/search-results/routes')(router)
 require('./routes/jobs/routes')(router)
 
+
 // Route index page
 router.get('/', function (req, res) {
   res.render('index')
