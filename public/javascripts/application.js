@@ -6,10 +6,8 @@ if (window.console && window.console.info) {
 }
 
 $(document).ready(function () {
-
   // add code here
 
   var showHideContent = new GOVUK.ShowHideContent()
-   showHideContent.init()
-
+  showHideContent.init()
 })
