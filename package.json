@@ -51,5 +51,8 @@
     "ignore": [
       "nunjucks"
     ]
+  },
+  "standard": {
+    "globals": [ "GOVUK" ]
   }
 }

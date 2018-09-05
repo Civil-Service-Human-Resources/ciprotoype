@@ -2,7 +2,6 @@ const dummyResults = require('../../data/dummyResults.json')
 
 module.exports = function (router) {
   router.get('/job/:id', function (req, res) {
-
     let sessionData = false
 
     if (req.session.data) {

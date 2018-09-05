@@ -8,30 +8,83 @@
 
 {% if input.width %}
 
-{{ govukInput({
-  "type" : input.type,
-  "label": {
-    "text": input.label
-  },
-  "hint": {
-    "text": input.hint
-  },
-  "id": input.id,
-  "name": input.name,
-  "classes": "govuk-input--width-" + input.width
+  {% if input.errorText %}
+    {{
+      govukInput({
+        "type" : input.type,
+        "label": {
+          "text": input.label
+        },
+        "hint": {
+          "text": input.hint
+        },
+        "id": input.id,
+        "name": input.name,
+        "classes": "govuk-input--width-" + input.width,
+        "errorMessage": {
+          "text": input.errorText
+        }
+      })
+    }}
+  {% else %}
+    {{
+      govukInput({
+        "type" : input.type,
+        "label": {
+          "text": input.label
+        },
+        "hint": {
+          "text": input.hint
+        },
+        "id": input.id,
+        "name": input.name,
+        "classes": "govuk-input--width-" + input.width,
+        "value": input.value
+      })
+    }}
+  {% endif %}
 
-}) }}
 
 {% else %}
-{{ govukInput({
-    "type" : input.type,
-  "label": {
-    "text": input.label
-  },
-  "hint": {
-    "text": input.hint
-  },
-  "id": input.id,
-  "name": input.name
-}) }}
+
+
+  {% if input.errorText %}
+
+    {{
+      govukInput({
+        "type" : input.type,
+        "label": {
+          "text": input.label
+        },
+        "hint": {
+          "text": input.hint
+        },
+        "id": input.id,
+        "name": input.name,
+        "errorMessage": {
+          "text": input.errorText
+        }
+      })
+    }}
+
+  {% else %}
+
+    {{
+      govukInput({
+        "type" : input.type,
+        "label": {
+          "text": input.label
+        },
+        "hint": {
+          "text": input.hint
+        },
+        "id": input.id,
+        "name": input.name,
+        "value": input.value
+      })
+    }}
+
+  {% endif %}
+
+
 {% endif %}
