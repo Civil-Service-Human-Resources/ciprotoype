@@ -6,7 +6,6 @@ module.exports = function (router) {
 
     if (req.session.data) {
       sessionData = req.session.data
-      console.log(req.session.data)
     }
 
     if (req.query.accountPassword) {
@@ -61,7 +60,6 @@ module.exports = function (router) {
 
     if (req.session.data) {
       sessionData = req.session.data
-      console.log(req.session.data)
     }
 
     if (req.query.accountStatus) {

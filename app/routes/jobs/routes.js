@@ -6,7 +6,6 @@ module.exports = function (router) {
 
     if (req.session.data) {
       sessionData = req.session.data
-      console.log(req.session.data)
     }
 
     const singleJob = () => {

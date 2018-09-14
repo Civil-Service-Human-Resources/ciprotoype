@@ -52,8 +52,6 @@ module.exports = function (router) {
   })
 
   router.get('/account/create-account', function (req, res) {
-    let formInputs = utils.getFormInputs(req.query)
-
     res.render('layoutBuilder.html', {
 
       'layout': '2-0',
@@ -72,10 +70,10 @@ module.exports = function (router) {
             'name': 'caName',
             'id': 'caName',
             'label': 'Full name',
-            'errorText': formInputs ? (!formInputs.caName ? 'You must enter a name' : undefined) : undefined,
+            'errorText': utils.getError(req.query, 'caName', 'You must enter a name'),
             'width': '20',
             'required': 'true',
-            'value': formInputs ? (formInputs.caName ? formInputs.caName : undefined) : undefined
+            'value': utils.getValue(req.query, 'caName')
           },
           {
             'type': 'text',
@@ -83,10 +81,10 @@ module.exports = function (router) {
             'id': 'accountEmail',
             'label': 'Email address',
             'hint': 'If you are a civil servant and you would like to view and apply for internal jobs, we recommend you create an account with your work email address',
-            'errorText': formInputs ? (!formInputs.accountEmail ? 'You must enter a valid email address' : undefined) : undefined,
+            'errorText': utils.getError(req.query, 'accountEmail', 'You must enter a valid email address'),
             'width': '20',
             'required': 'true',
-            'value': formInputs ? (formInputs.accountEmail ? formInputs.accountEmail : undefined) : undefined
+            'value': utils.getValue(req.query, 'accountEmail')
           },
           {
             'type': 'password',
@@ -94,20 +92,20 @@ module.exports = function (router) {
             'hint': 'Your password must be at least eight characters including at least one uppercase letter, one special character and one number',
             'id': 'accountPassword',
             'label': 'Password',
-            'errorText': formInputs ? (!formInputs.accountPassword ? 'Please enter a valid password' : undefined) : undefined,
+            'errorText': utils.getError(req.query, 'accountPassword', 'Please enter a valid password'),
             'width': '20',
             'required': 'true',
-            'value': formInputs ? (formInputs.accountPassword ? formInputs.accountPassword : undefined) : undefined
+            'value': utils.getValue(req.query, 'accountPassword')
           },
           {
             'type': 'password',
             'name': 'accountConfirmPassword',
             'id': 'accountConfirmPassword',
             'label': 'Confirm password',
-            'errorText': formInputs ? (!formInputs.accountConfirmPassword ? 'Please enter a valid password' : undefined) : undefined,
+            'errorText': utils.getError(req.query, 'accountConfirmPassword', 'Please enter a valid password'),
             'width': '20',
             'required': 'true',
-            'value': formInputs ? (formInputs.accountConfirmPassword ? formInputs.accountConfirmPassword : undefined) : undefined
+            'value': utils.getValue(req.query, 'accountConfirmPassword')
           }
 
         ],
@@ -127,8 +125,6 @@ module.exports = function (router) {
         isGov: utils.isGovEmail(req.query.accountEmail)
       }
     }
-
-    let formInputs = utils.getFormInputs(req.query)
 
     req.session.save(() => {
       res.render('layoutBuilder.html', {
@@ -150,11 +146,11 @@ module.exports = function (router) {
             {
               'type': 'text',
               'name': 'activationCode',
-              'id': 'accountEmail',
+              'id': 'activationCode',
               'label': 'Activation code',
               'width': '20',
-              'errorText': formInputs ? (!formInputs.accountEmail ? 'Please enter a valid activation code' : undefined) : undefined,
-              'value': formInputs ? (formInputs.accountEmail ? formInputs.accountEmail : undefined) : undefined
+              'errorText': utils.getError(req.query, 'activationCode', 'Please enter a valid activation code'),
+              'value': utils.getValue(req.query, 'activationCode')
             },
             {
               'type': 'hidden',
@@ -206,10 +202,7 @@ module.exports = function (router) {
 
     if (req.session.data) {
       sessionData = req.session.data
-      console.log(req.session.data)
     }
-
-    let formInputs = utils.getFormInputs(req.query)
 
     res.render('layoutBuilder.html', {
       'layout': '2-0',
@@ -231,15 +224,53 @@ module.exports = function (router) {
             'label': 'Civil Service or work email address',
             'hint': 'Enter your Civil Service email address or a recognised government email address',
             'width': '20',
-            'errorText': formInputs ? (!formInputs.csEmail ? 'Please enter a valid email' : undefined) : undefined,
-            'value': formInputs ? (formInputs.csEmail ? formInputs.csEmail : undefined) : undefined
+            'errorText': utils.getError(req.query, 'csEmail', 'Please enter a valid email'),
+            'value': utils.getValue(req.query, 'csEmail')
           }
 
         ],
         'buttonText': 'Verify your email address'
-
       }
 
+    })
+  })
+
+  router.get('/account/verify-cs-link-sent', function (req, res) {
+    console.log(req.query)
+    if (req.session.data) {
+      req.session.data.isGov = true
+      req.session.save(() => {
+        console.log(req.session.data)
+      })
+    }
+
+    res.render('layoutBuilder.html', {
+      'sessionData': req.session.data,
+      'layout': '2-0',
+      'cs': true,
+      'h1': 'Check your email',
+      'form': {
+        'action': '../search/results',
+        'inputs': [
+          {
+            'type': 'partial',
+            'path': 'account/verifyLink'
+          },
+          {
+            'type': 'hidden',
+            'name': 'isCS',
+            'id': 'isCS',
+            'value': 'true'
+          },
+          {
+            'type': 'details',
+            'summary': 'I haven\'t received my verification email',
+            'text': '<p class="govuk-body">It may take a few minutes for the email to arrive. Please check your email spam  or junk mail folder. If you still haven\t received your email after a short while, you can  <a href="#">re-send a verification link</a>.'
+          }
+
+        ],
+        'buttonText': 'Search for a job'
+      }
     })
   })
 }
