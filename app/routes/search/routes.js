@@ -57,6 +57,8 @@ module.exports = function (router) {
   router.get('/search/results', function (req, res) {
     let sessionData = false
     let messaging = false
+    let notice = false
+    let location = false
 
     if (req.session.data) {
       sessionData = req.session.data
@@ -69,6 +71,15 @@ module.exports = function (router) {
     if (req.query.isCS) {
       messaging = "You've successfully verified your Civil Service work email address"
     }
+
+    if (req.query.location === 'timbuktu') {
+      notice = req.query.location
+    }
+
+    if (req.query.location) {
+      location = req.query.location
+    }
+
 
     let correctResults = () => {
       let result = []
@@ -88,7 +99,9 @@ module.exports = function (router) {
     res.render('search/results/index.html', {
       'data': correctResults(),
       'sessionData': sessionData,
-      'messaging': messaging
+      'messaging': messaging,
+      'notice': notice,
+      'location': location
     })
   })
 }

@@ -9,10 +9,19 @@
 <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 
 
-    {% if messaging  %}
-        <div class="notification-success">
-            <p class="govuk-body-l">{{ messaging }}</p>
+    {% if notice  %}
+        <div class="notification-black">
+            <div class="govuk-body-l">
+                <h3>No results found based on the location <span>{{notice}}</span></h3>
+                <p>Showing results based on keyword, salary and department</p>
+            </div>
         </div>
+    {% endif %}
+
+    {% if messaging  %}
+    <div class="notification-success">
+        <p class="govuk-body-l">{{ messaging }}</p>
+    </div>
     {% endif %}
 
 
@@ -58,7 +67,7 @@
 
 
             <div class="govuk-grid-column-one-third">
-                <div class="job-search__filters">
+                <form class="job-search__filters">
                     <h2 class="job-search__filters-title">
                         <span class="js-showhide" data-showhide-target-id="filterShowHide" tabindex="-1">Edit search</span>
                     </h2>
@@ -69,8 +78,8 @@
                               Keyword (optional)
                           </label>
 
-                          <input class="govuk-input" id="location" name="keyword" type="text"
-                                 aria-describedby="location">
+                          <input class="govuk-input" id="keyword" name="keyword" type="text"
+                                 aria-describedby="keyword">
                       </div>
 
                         <div class="govuk-form-group">
@@ -79,7 +88,12 @@
                             </label>
 
                             <input class="govuk-input" id="location" name="location" type="text"
-                                   aria-describedby="location">
+                                   aria-describedby="location"
+                                   {% if location  %}
+                                   value="{{ location }}"
+                                   {% endif %}
+                            />
+
                         </div>
 
                         <div class="govuk-form-group ">
@@ -364,7 +378,7 @@
                         </div>
 
                     </div>
-                </div>
+                </form>
             </div>
 
             <div class="govuk-grid-column-two-thirds">
